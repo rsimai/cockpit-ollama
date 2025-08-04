@@ -6,6 +6,8 @@ Take this with a grain of salt, it was produced by prompting only without code r
 
 It's an application which connects to a local ollama(-container) and offers a chat window.
 
+![Cockpit screenshot](./cockpit-ollama.png)
+
 # Further reading
 
  * The [Starter Kit announcement](https://cockpit-project.org/blog/cockpit-starter-kit.html)
