@@ -158,7 +158,7 @@ export const Application = () => {
             <Card>
                 <CardTitle>Ollama</CardTitle>
                 <CardBody>
-                    <Alert variant="info" isInline title={cockpit.format(_("Running on $0"), hostname)} />
+                    <Alert variant="info" isInline title={cockpit.format(_("Running on host $0"), hostname)} />
                 </CardBody>
             </Card>
             <Card>
@@ -179,7 +179,7 @@ export const Application = () => {
                                         toggle={toggle}
                                     >
                                         <SelectList>
-                                            {models.map(model => <SelectOption key={model.digest} value={model.name} />)}
+                                            {models.map(model => <SelectOption key={model.digest} value={model.name}>{model.name}</SelectOption>)}
                                         </SelectList>
                                     </Select>
                                 ) : (
@@ -194,6 +194,7 @@ export const Application = () => {
                     <Grid hasGutter>
                         <GridItem span={11}>
                             <TextArea
+                                onKeyDown={handleKeyDown}
                                 value={prompt}
                                 onChange={(_event, value) => setPrompt(value)}
                                 rows={3}

@@ -31830,6 +31830,12 @@
         setIsGenerating(false);
       });
     };
+    const handleKeyDown = (event) => {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        handleSend();
+      }
+    };
     const toggle = (toggleRef) => /* @__PURE__ */ import_react6.default.createElement(
       MenuToggle,
       {
@@ -31850,12 +31856,13 @@
         onOpenChange: (isOpen) => setModelSelectOpen(isOpen),
         toggle
       },
-      /* @__PURE__ */ import_react6.default.createElement(SelectList, null, models.map((model) => /* @__PURE__ */ import_react6.default.createElement(SelectOption, { key: model.digest, value: model.name })))
+      /* @__PURE__ */ import_react6.default.createElement(SelectList, null, models.map((model) => /* @__PURE__ */ import_react6.default.createElement(SelectOption, { key: model.digest, value: model.name }, model.name)))
     ) : /* @__PURE__ */ import_react6.default.createElement(Alert, { variant: "info", isInline: true, title: _("No models found.") }))))), /* @__PURE__ */ import_react6.default.createElement(Card, null, /* @__PURE__ */ import_react6.default.createElement(CardBody, null, /* @__PURE__ */ import_react6.default.createElement(Grid, { hasGutter: true }, /* @__PURE__ */ import_react6.default.createElement(GridItem, { span: 11 }, /* @__PURE__ */ import_react6.default.createElement(
       TextArea,
       {
         value: prompt,
         onChange: (_event, value) => setPrompt(value),
+        onKeyDown: handleKeyDown,
         rows: 3,
         "aria-label": _("Prompt input"),
         placeholder: _("Enter your prompt here..."),
@@ -31869,7 +31876,7 @@
         isDisabled: !selectedModel || !prompt.trim() || isGenerating
       },
       isGenerating ? /* @__PURE__ */ import_react6.default.createElement(Spinner, { size: "sm", "aria-label": _("Sending") }) : _("Send")
-    ))))), /* @__PURE__ */ import_react6.default.createElement(Card, null, /* @__PURE__ */ import_react6.default.createElement(CardTitle, null, _("Response")), /* @__PURE__ */ import_react6.default.createElement(CardBody, null, isGenerating && !response && /* @__PURE__ */ import_react6.default.createElement(Spinner, { "aria-label": _("Generating response") }), generationError && /* @__PURE__ */ import_react6.default.createElement(Alert, { variant: "danger", isInline: true, title: generationError }), response && /* @__PURE__ */ import_react6.default.createElement("div", { style: { whiteSpace: "pre-wrap", fontFamily: "monospace" } }, response), !isGenerating && !response && !generationError && /* @__PURE__ */ import_react6.default.createElement("p", null, _("The response from Ollama will appear here.")))));
+    ))))), /* @__PURE__ */ import_react6.default.createElement(Card, null, /* @__PURE__ */ import_react6.default.createElement(CardTitle, null, _("Response")), /* @__PURE__ */ import_react6.default.createElement(CardBody, null, isGenerating && !response && /* @__PURE__ */ import_react6.default.createElement(Spinner, { "aria-label": _("Generating response") }), generationError && /* @__PURE__ */ import_react6.default.createElement(Alert, { variant: "danger", isInline: true, title: generationError }), response && /* @__PURE__ */ import_react6.default.createElement("div", { style: { whiteSpace: "pre-wrap", fontFamily: "monospace", overflowY: "auto", maxHeight: "300px" } }, response), !isGenerating && !response && !generationError && /* @__PURE__ */ import_react6.default.createElement("p", null, _("The response from Ollama will appear here.")))));
   };
 
   // src/index.tsx
