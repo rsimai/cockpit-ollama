@@ -1109,7 +1109,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useReducer(reducer, initialArg, init);
           }
-          function useRef5(initialValue) {
+          function useRef6(initialValue) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
@@ -1903,7 +1903,7 @@
           exports.useLayoutEffect = useLayoutEffect2;
           exports.useMemo = useMemo4;
           exports.useReducer = useReducer;
-          exports.useRef = useRef5;
+          exports.useRef = useRef6;
           exports.useState = useState7;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition;
@@ -31759,6 +31759,8 @@
     const [prompt, setPrompt] = (0, import_react6.useState)("");
     const [response, setResponse] = (0, import_react6.useState)("");
     const [isGenerating, setIsGenerating] = (0, import_react6.useState)(false);
+    const [runningPromise, setRunningPromise] = (0, import_react6.useState)(null);
+    const responseEndRef = (0, import_react6.useRef)(null);
     (0, import_react6.useEffect)(() => {
       cockpit_default.script("hostname").then((content) => setHostname(content.trim())).catch((error) => console.error("Failed to fetch hostname:", error));
       const ollama = cockpit_default.http(11434);
@@ -31776,6 +31778,28 @@
         setLoadingModels(false);
       });
     }, []);
+    (0, import_react6.useEffect)(() => {
+      cockpit_default.script("hostname").then((content) => setHostname(content.trim())).catch((error) => console.error("Failed to fetch hostname:", error));
+      const ollama = cockpit_default.http(11434);
+      ollama.get("/api/tags").then((response2) => {
+        const data = JSON.parse(response2);
+        setModels(data.models || []);
+      }).catch((err) => {
+        console.error("Failed to fetch Ollama models:", err);
+        if (err.status === 0) {
+          setOllamaError(_("Failed to connect to Ollama service. Is it running on localhost:11434?"));
+        } else {
+          setOllamaError(`${_("Error fetching models:")} ${err.message}`);
+        }
+      }).finally(() => {
+        setLoadingModels(false);
+      });
+    }, []);
+    (0, import_react6.useEffect)(() => {
+      if (responseEndRef.current) {
+        responseEndRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+    }, [response]);
     const onModelSelect = (event, value) => {
       setSelectedModel(value);
       setModelSelectOpen(false);
@@ -31799,6 +31823,7 @@
         body: JSON.stringify(payload),
         headers: { "Content-Type": "application/json" }
       });
+      setRunningPromise(promise);
       promise.stream((chunk) => {
         try {
           const lines = chunk.split("\n").filter((line) => line.trim() !== "");
@@ -31828,7 +31853,13 @@
       });
       promise.finally(() => {
         setIsGenerating(false);
+        setRunningPromise(null);
       });
+    };
+    const handleStop = () => {
+      if (runningPromise) {
+        runningPromise.close();
+      }
     };
     const handleKeyDown = (event) => {
       if (event.key === "Enter" && !event.shiftKey) {
@@ -31857,7 +31888,7 @@
         toggle
       },
       /* @__PURE__ */ import_react6.default.createElement(SelectList, null, models.map((model) => /* @__PURE__ */ import_react6.default.createElement(SelectOption, { key: model.digest, value: model.name }, model.name)))
-    ) : /* @__PURE__ */ import_react6.default.createElement(Alert, { variant: "info", isInline: true, title: _("No models found.") }))))), /* @__PURE__ */ import_react6.default.createElement(Card, null, /* @__PURE__ */ import_react6.default.createElement(CardBody, null, /* @__PURE__ */ import_react6.default.createElement(Grid, { hasGutter: true }, /* @__PURE__ */ import_react6.default.createElement(GridItem, { span: 11 }, /* @__PURE__ */ import_react6.default.createElement(
+    ) : /* @__PURE__ */ import_react6.default.createElement(Alert, { variant: "info", isInline: true, title: _("No models found.") }))))), /* @__PURE__ */ import_react6.default.createElement(Card, null, /* @__PURE__ */ import_react6.default.createElement(CardBody, null, /* @__PURE__ */ import_react6.default.createElement(Grid, { hasGutter: true }, /* @__PURE__ */ import_react6.default.createElement(GridItem, { span: 10 }, /* @__PURE__ */ import_react6.default.createElement(
       TextArea,
       {
         value: prompt,
@@ -31868,15 +31899,22 @@
         placeholder: _("Enter your prompt here..."),
         isDisabled: !selectedModel || isGenerating
       }
-    )), /* @__PURE__ */ import_react6.default.createElement(GridItem, { span: 1, style: { display: "flex", alignItems: "flex-end" } }, /* @__PURE__ */ import_react6.default.createElement(
+    )), /* @__PURE__ */ import_react6.default.createElement(GridItem, { span: 2, style: { display: "flex", alignItems: "flex-end" } }, !isGenerating ? /* @__PURE__ */ import_react6.default.createElement(
       Button,
       {
         variant: "primary",
         onClick: handleSend,
-        isDisabled: !selectedModel || !prompt.trim() || isGenerating
+        isDisabled: !selectedModel || !prompt.trim()
       },
-      isGenerating ? /* @__PURE__ */ import_react6.default.createElement(Spinner, { size: "sm", "aria-label": _("Sending") }) : _("Send")
-    ))))), /* @__PURE__ */ import_react6.default.createElement(Card, null, /* @__PURE__ */ import_react6.default.createElement(CardTitle, null, _("Response")), /* @__PURE__ */ import_react6.default.createElement(CardBody, null, isGenerating && !response && /* @__PURE__ */ import_react6.default.createElement(Spinner, { "aria-label": _("Generating response") }), generationError && /* @__PURE__ */ import_react6.default.createElement(Alert, { variant: "danger", isInline: true, title: generationError }), response && /* @__PURE__ */ import_react6.default.createElement("div", { style: { whiteSpace: "pre-wrap", fontFamily: "monospace", overflowY: "auto", maxHeight: "300px" } }, response), !isGenerating && !response && !generationError && /* @__PURE__ */ import_react6.default.createElement("p", null, _("The response from Ollama will appear here.")))));
+      _("Send")
+    ) : /* @__PURE__ */ import_react6.default.createElement(
+      Button,
+      {
+        variant: "danger",
+        onClick: handleStop
+      },
+      _("Stop")
+    ))))), /* @__PURE__ */ import_react6.default.createElement(Card, null, /* @__PURE__ */ import_react6.default.createElement(CardTitle, null, _("Response")), /* @__PURE__ */ import_react6.default.createElement(CardBody, null, /* @__PURE__ */ import_react6.default.createElement("div", { style: { whiteSpace: "pre-wrap", fontFamily: "monospace", overflowY: "auto", maxHeight: "300px" } }, isGenerating && !response && /* @__PURE__ */ import_react6.default.createElement(Spinner, { "aria-label": _("Generating response") }), generationError && /* @__PURE__ */ import_react6.default.createElement(Alert, { variant: "danger", isInline: true, title: generationError }), response, !isGenerating && !response && !generationError && /* @__PURE__ */ import_react6.default.createElement("p", null, _("The response from Ollama will appear here.")), /* @__PURE__ */ import_react6.default.createElement("div", { ref: responseEndRef })))));
   };
 
   // src/index.tsx
