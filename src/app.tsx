@@ -29,6 +29,8 @@ import { MenuToggle } from "@patternfly/react-core/dist/esm/components/MenuToggl
 import { Button } from "@patternfly/react-core/dist/esm/components/Button/index.js";
 import { Grid, GridItem } from "@patternfly/react-core/dist/esm/layouts/Grid/index.js";
 import { TextArea } from "@patternfly/react-core/dist/esm/components/TextArea/index.js";
+import { InputGroup } from "@patternfly/react-core/dist/esm/components/InputGroup/index.js";
+import { InputGroupItem } from "@patternfly/react-core/dist/esm/components/InputGroup/index.js";
 
 import cockpit from 'cockpit';
 
@@ -101,6 +103,10 @@ export const Application = () => {
                 handleSend();
             }
         }
+    };
+
+    const clearPrompt = () => {
+        setPrompt('');
     };
 
     const handleStop = () => {
@@ -223,15 +229,31 @@ export const Application = () => {
                 <CardBody>
                     <Grid hasGutter>
                         <GridItem span={11}>
-                            <TextArea
-                                onKeyDown={handleKeyDown}
-                                value={prompt}
-                                onChange={(_event, value) => setPrompt(value)}
-                                rows={3}
-                                aria-label={_("Prompt input")}
-                                placeholder={_("Enter your prompt here...")}
-                                isDisabled={!selectedModel || isGenerating}
-                            />
+                            <InputGroup>
+                                <InputGroupItem isFill>
+                                    <TextArea
+                                        onKeyDown={handleKeyDown}
+                                        value={prompt}
+                                        onChange={(_event, value) => setPrompt(value)}
+                                        rows={3}
+                                        aria-label={_("Prompt input")}
+                                        placeholder={_("Enter your prompt here...")}
+                                        isDisabled={!selectedModel || isGenerating}
+                                    />
+                                </InputGroupItem>
+                                {prompt && (
+                                    <InputGroupItem>
+                                        <Button
+                                            variant="plain"
+                                            onClick={clearPrompt}
+                                            aria-label={_("Clear prompt")}
+                                            style={{ position: 'absolute', right: '8px', top: '8px', zIndex: 1 }}
+                                        >
+                                            ×
+                                        </Button>
+                                    </InputGroupItem>
+                                )}
+                            </InputGroup>
                         </GridItem>
                         <GridItem span={1} style={{ display: 'flex', alignItems: 'flex-end' }}>
                             <Button

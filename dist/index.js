@@ -527,7 +527,7 @@
             }
             return element;
           };
-          function createElement28(type, config, children) {
+          function createElement30(type, config, children) {
             var propName;
             var props = {};
             var key = null;
@@ -988,7 +988,7 @@
             }
             return lazyType;
           }
-          function forwardRef9(render) {
+          function forwardRef10(render) {
             {
               if (render != null && render.$$typeof === REACT_MEMO_TYPE) {
                 error("forwardRef requires a render function but received a `memo` component. Instead of forwardRef(memo(...)), use memo(forwardRef(...)).");
@@ -1109,7 +1109,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useReducer(reducer, initialArg, init);
           }
-          function useRef6(initialValue) {
+          function useRef7(initialValue) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
@@ -1626,7 +1626,7 @@
                 error("React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, info);
               }
             }
-            var element = createElement28.apply(this, arguments);
+            var element = createElement30.apply(this, arguments);
             if (element == null) {
               return element;
             }
@@ -1886,7 +1886,7 @@
           exports.createElement = createElement$1;
           exports.createFactory = createFactory;
           exports.createRef = createRef5;
-          exports.forwardRef = forwardRef9;
+          exports.forwardRef = forwardRef10;
           exports.isValidElement = isValidElement4;
           exports.lazy = lazy;
           exports.memo = memo;
@@ -1903,7 +1903,7 @@
           exports.useLayoutEffect = useLayoutEffect2;
           exports.useMemo = useMemo4;
           exports.useReducer = useReducer;
-          exports.useRef = useRef6;
+          exports.useRef = useRef7;
           exports.useState = useState7;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition;
@@ -2400,9 +2400,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React39 = require_react();
+          var React41 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React39.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React41.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -4009,7 +4009,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React39.Children.forEach(props.children, function(child) {
+                  React41.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -9433,7 +9433,7 @@
               }
             }
           }
-          function createElement28(type, props, rootContainerElement, parentNamespace) {
+          function createElement30(type, props, rootContainerElement, parentNamespace) {
             var isCustomComponentTag;
             var ownerDocument = getOwnerDocumentFromRootContainer(rootContainerElement);
             var domElement;
@@ -10303,7 +10303,7 @@
               }
               parentNamespace = hostContextDev.namespace;
             }
-            var domElement = createElement28(type, props, rootContainerInstance, parentNamespace);
+            var domElement = createElement30(type, props, rootContainerInstance, parentNamespace);
             precacheFiberNode(internalInstanceHandle, domElement);
             updateFiberProps(domElement, props);
             return domElement;
@@ -28135,6 +28135,47 @@
   var TextArea = React36.forwardRef((props, ref) => React36.createElement(TextAreaBase, Object.assign({}, props, { innerRef: ref })));
   TextArea.displayName = "TextArea";
 
+  // node_modules/@patternfly/react-core/dist/esm/components/InputGroup/InputGroup.js
+  var React37 = __toESM(require_react());
+
+  // node_modules/@patternfly/react-styles/css/components/InputGroup/input-group.mjs
+  var input_group_default = {
+    "inputGroup": "pf-v6-c-input-group",
+    "inputGroupItem": "pf-v6-c-input-group__item",
+    "inputGroupText": "pf-v6-c-input-group__text",
+    "modifiers": {
+      "searchExpandable": "pf-m-search-expandable",
+      "expanded": "pf-m-expanded",
+      "searchInput": "pf-m-search-input",
+      "searchExpand": "pf-m-search-expand",
+      "searchAction": "pf-m-search-action",
+      "expandStart": "pf-m-expand-start",
+      "box": "pf-m-box",
+      "plain": "pf-m-plain",
+      "disabled": "pf-m-disabled",
+      "fill": "pf-m-fill"
+    }
+  };
+
+  // node_modules/@patternfly/react-core/dist/esm/components/InputGroup/InputGroup.js
+  var InputGroupBase = (_a) => {
+    var { className, children, innerRef } = _a, props = __rest(_a, ["className", "children", "innerRef"]);
+    const ref = React37.useRef(null);
+    const inputGroupRef = innerRef || ref;
+    return React37.createElement("div", Object.assign({ ref: inputGroupRef, className: css(input_group_default.inputGroup, className) }, props), children);
+  };
+  InputGroupBase.displayName = "InputGroupBase";
+  var InputGroup = React37.forwardRef((props, ref) => React37.createElement(InputGroupBase, Object.assign({ innerRef: ref }, props)));
+  InputGroup.displayName = "InputGroup";
+
+  // node_modules/@patternfly/react-core/dist/esm/components/InputGroup/InputGroupItem.js
+  var React38 = __toESM(require_react());
+  var InputGroupItem = (_a) => {
+    var { className, children, isFill = false, isBox = false, isPlain, isDisabled } = _a, props = __rest(_a, ["className", "children", "isFill", "isBox", "isPlain", "isDisabled"]);
+    return React38.createElement("div", Object.assign({ className: css(input_group_default.inputGroupItem, isFill && input_group_default.modifiers.fill, isBox && input_group_default.modifiers.box, isPlain && input_group_default.modifiers.plain, isDisabled && input_group_default.modifiers.disabled, className) }, props), children);
+  };
+  InputGroupItem.displayName = "InputGroupItem";
+
   // pkg/lib/cockpit/_internal/base64.js
   function uint6_to_b64(x) {
     return x < 26 ? x + 65 : x < 52 ? x + 71 : x < 62 ? x - 4 : x === 62 ? 43 : x === 63 ? 47 : 65;
@@ -31797,6 +31838,9 @@
         }
       }
     };
+    const clearPrompt = () => {
+      setPrompt("");
+    };
     const handleStop = () => {
       if (currentRequest) {
         currentRequest.close();
@@ -31877,7 +31921,7 @@
         toggle
       },
       /* @__PURE__ */ import_react6.default.createElement(SelectList, null, models.map((model) => /* @__PURE__ */ import_react6.default.createElement(SelectOption, { key: model.digest, value: model.name }, model.name)))
-    ) : /* @__PURE__ */ import_react6.default.createElement(Alert, { variant: "info", isInline: true, title: _("No models found.") }))))), /* @__PURE__ */ import_react6.default.createElement(Card, null, /* @__PURE__ */ import_react6.default.createElement(CardBody, null, /* @__PURE__ */ import_react6.default.createElement(Grid, { hasGutter: true }, /* @__PURE__ */ import_react6.default.createElement(GridItem, { span: 11 }, /* @__PURE__ */ import_react6.default.createElement(
+    ) : /* @__PURE__ */ import_react6.default.createElement(Alert, { variant: "info", isInline: true, title: _("No models found.") }))))), /* @__PURE__ */ import_react6.default.createElement(Card, null, /* @__PURE__ */ import_react6.default.createElement(CardBody, null, /* @__PURE__ */ import_react6.default.createElement(Grid, { hasGutter: true }, /* @__PURE__ */ import_react6.default.createElement(GridItem, { span: 11 }, /* @__PURE__ */ import_react6.default.createElement(InputGroup, null, /* @__PURE__ */ import_react6.default.createElement(InputGroupItem, { isFill: true }, /* @__PURE__ */ import_react6.default.createElement(
       TextArea,
       {
         onKeyDown: handleKeyDown,
@@ -31888,7 +31932,16 @@
         placeholder: _("Enter your prompt here..."),
         isDisabled: !selectedModel || isGenerating
       }
-    )), /* @__PURE__ */ import_react6.default.createElement(GridItem, { span: 1, style: { display: "flex", alignItems: "flex-end" } }, /* @__PURE__ */ import_react6.default.createElement(
+    )), prompt && /* @__PURE__ */ import_react6.default.createElement(InputGroupItem, null, /* @__PURE__ */ import_react6.default.createElement(
+      Button,
+      {
+        variant: "plain",
+        onClick: clearPrompt,
+        "aria-label": _("Clear prompt"),
+        style: { position: "absolute", right: "8px", top: "8px", zIndex: 1 }
+      },
+      "\xD7"
+    )))), /* @__PURE__ */ import_react6.default.createElement(GridItem, { span: 1, style: { display: "flex", alignItems: "flex-end" } }, /* @__PURE__ */ import_react6.default.createElement(
       Button,
       {
         variant: isGenerating ? "secondary" : "primary",
