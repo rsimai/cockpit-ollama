@@ -31,6 +31,7 @@ import { Grid, GridItem } from "@patternfly/react-core/dist/esm/layouts/Grid/ind
 import { TextArea } from "@patternfly/react-core/dist/esm/components/TextArea/index.js";
 import { InputGroup } from "@patternfly/react-core/dist/esm/components/InputGroup/index.js";
 import { InputGroupItem } from "@patternfly/react-core/dist/esm/components/InputGroup/index.js";
+import { ClipboardCopy } from "@patternfly/react-core/dist/esm/components/ClipboardCopy/index.js";
 
 import cockpit from 'cockpit';
 
@@ -107,6 +108,33 @@ export const Application = () => {
 
     const clearPrompt = () => {
         setPrompt('');
+    };
+
+    const renderResponse = (text: string) => {
+        const parts = text.split(/(```[\s\S]*?```)/g);
+        return parts.map((part, index) => {
+            if (part.startsWith('```') && part.endsWith('```')) {
+                const content = part.slice(3, -3);
+                const lines = content.split('\n');
+                const language = lines[0].trim();
+                const code = lines.slice(1).join('\n');
+                return (
+                    <div key={index}>
+                        {language && <div style={{ fontSize: '0.875rem', color: 'var(--pf-v6-global--Color--200)', marginBottom: '0.25rem' }}>{language}</div>}
+                        <ClipboardCopy
+                            isCode
+                            variant="expansion"
+                            isExpanded
+                            hoverTip={_("Copy")}
+                            clickTip={_("Copied")}
+                        >
+                            {code}
+                        </ClipboardCopy>
+                    </div>
+                );
+            }
+            return <span key={index} style={{ whiteSpace: 'pre-wrap' }}>{part}</span>;
+        });
     };
 
     const handleStop = () => {
@@ -272,7 +300,7 @@ export const Application = () => {
                 <CardBody style={{ flex: 1, overflow: 'auto' }}>
                     {isGenerating && !response && <Spinner aria-label={_("Generating response")} />}
                     {generationError && <Alert variant="danger" isInline title={generationError} />}
-                    {response && <div ref={responseRef} style={{ whiteSpace: 'pre-wrap', fontFamily: 'monospace' }}>{response}</div>}
+                    {response && <div ref={responseRef} style={{ fontFamily: 'monospace' }}>{renderResponse(response)}</div>}
                     {!isGenerating && !response && !generationError && <p>{_("The response from Ollama will appear here.")}</p>}
                 </CardBody>
             </Card>
