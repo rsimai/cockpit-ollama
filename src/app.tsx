@@ -58,6 +58,8 @@ export const Application = () => {
     const [isGenerating, setIsGenerating] = useState(false);
     const [currentRequest, setCurrentRequest] = useState<any>(null);
     const [codeBlockProcessing, setCodeBlockProcessing] = useState(false);
+    const [expandedBlocks, setExpandedBlocks] = useState<{[key: number]: boolean}>({});
+    const [hoveredBlock, setHoveredBlock] = useState<number | null>(null);
     const responseRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -120,18 +122,32 @@ export const Application = () => {
                 const lines = content.split('\n');
                 const language = lines[0].trim();
                 const code = lines.slice(1).join('\n');
+                const isExpanded = expandedBlocks[index] ?? true;
                 return (
                     <div key={index}>
-                        {language && <div style={{ fontSize: '0.875rem', color: 'var(--pf-v6-global--Color--200)', marginBottom: '0.25rem' }}>{language}</div>}
-                        <ClipboardCopy
-                            isCode
-                            variant="expansion"
-                            isExpanded
-                            hoverTip={_("Copy")}
-                            clickTip={_("Copied")}
-                        >
-                            {code}
-                        </ClipboardCopy>
+                        <div style={{ border: '1px solid var(--pf-v6-global--BorderColor--100)', borderRadius: '3px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', padding: '0.5rem', backgroundColor: 'var(--pf-v6-global--BackgroundColor--200)', borderBottom: '1px solid var(--pf-v6-global--BorderColor--100)' }}>
+                                <span style={{ marginRight: 'auto' }}>{language}</span>
+                                <Button 
+                                    variant="plain" 
+                                    onMouseEnter={() => setHoveredBlock(index)}
+                                    onMouseLeave={() => setHoveredBlock(null)}
+                                    onClick={() => navigator.clipboard.writeText(code)}
+                                >
+                                    {_("Copy")}
+                                </Button>
+                            </div>
+                            <div style={{ 
+                                padding: '0.5rem', 
+backgroundColor: hoveredBlock === index ? 'rgba(0, 123, 255, 0.3)' : 'rgba(128, 128, 128, 0.2)', 
+                                fontFamily: 'monospace', 
+                                whiteSpace: 'pre-wrap', 
+                                overflow: 'auto',
+                                transition: 'background-color 0.2s'
+                            }}>
+                                {code}
+                            </div>
+                        </div>
                     </div>
                 );
             }

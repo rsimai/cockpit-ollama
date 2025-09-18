@@ -255,20 +255,20 @@
           {
             Object.freeze(emptyObject);
           }
-          function Component12(props, context, updater) {
+          function Component9(props, context, updater) {
             this.props = props;
             this.context = context;
             this.refs = emptyObject;
             this.updater = updater || ReactNoopUpdateQueue;
           }
-          Component12.prototype.isReactComponent = {};
-          Component12.prototype.setState = function(partialState, callback) {
+          Component9.prototype.isReactComponent = {};
+          Component9.prototype.setState = function(partialState, callback) {
             if (typeof partialState !== "object" && typeof partialState !== "function" && partialState != null) {
               throw new Error("setState(...): takes an object of state variables to update or a function which returns an object of state variables.");
             }
             this.updater.enqueueSetState(this, partialState, callback, "setState");
           };
-          Component12.prototype.forceUpdate = function(callback) {
+          Component9.prototype.forceUpdate = function(callback) {
             this.updater.enqueueForceUpdate(this, callback, "forceUpdate");
           };
           {
@@ -277,7 +277,7 @@
               replaceState: ["replaceState", "Refactor your code to use setState instead (see https://github.com/facebook/react/issues/3236)."]
             };
             var defineDeprecationWarning = function(methodName, info) {
-              Object.defineProperty(Component12.prototype, methodName, {
+              Object.defineProperty(Component9.prototype, methodName, {
                 get: function() {
                   warn("%s(...) is deprecated in plain JavaScript React classes. %s", info[0], info[1]);
                   return void 0;
@@ -292,7 +292,7 @@
           }
           function ComponentDummy() {
           }
-          ComponentDummy.prototype = Component12.prototype;
+          ComponentDummy.prototype = Component9.prototype;
           function PureComponent(props, context, updater) {
             this.props = props;
             this.context = context;
@@ -301,9 +301,9 @@
           }
           var pureComponentPrototype = PureComponent.prototype = new ComponentDummy();
           pureComponentPrototype.constructor = PureComponent;
-          assign(pureComponentPrototype, Component12.prototype);
+          assign(pureComponentPrototype, Component9.prototype);
           pureComponentPrototype.isPureReactComponent = true;
-          function createRef7() {
+          function createRef5() {
             var refObject = {
               current: null
             };
@@ -527,7 +527,7 @@
             }
             return element;
           };
-          function createElement36(type, config, children) {
+          function createElement31(type, config, children) {
             var propName;
             var props = {};
             var key = null;
@@ -988,7 +988,7 @@
             }
             return lazyType;
           }
-          function forwardRef11(render) {
+          function forwardRef10(render) {
             {
               if (render != null && render.$$typeof === REACT_MEMO_TYPE) {
                 error("forwardRef requires a render function but received a `memo` component. Instead of forwardRef(memo(...)), use memo(forwardRef(...)).");
@@ -1366,8 +1366,8 @@
               return describeNativeComponentFrame(fn, false);
             }
           }
-          function shouldConstruct(Component13) {
-            var prototype = Component13.prototype;
+          function shouldConstruct(Component10) {
+            var prototype = Component10.prototype;
             return !!(prototype && prototype.isReactComponent);
           }
           function describeUnknownElementTypeFrameInDEV(type, source, ownerFn) {
@@ -1626,7 +1626,7 @@
                 error("React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, info);
               }
             }
-            var element = createElement36.apply(this, arguments);
+            var element = createElement31.apply(this, arguments);
             if (element == null) {
               return element;
             }
@@ -1873,7 +1873,7 @@
             only: onlyChild
           };
           exports.Children = Children;
-          exports.Component = Component12;
+          exports.Component = Component9;
           exports.Fragment = REACT_FRAGMENT_TYPE;
           exports.Profiler = REACT_PROFILER_TYPE;
           exports.PureComponent = PureComponent;
@@ -1885,8 +1885,8 @@
           exports.createContext = createContext5;
           exports.createElement = createElement$1;
           exports.createFactory = createFactory;
-          exports.createRef = createRef7;
-          exports.forwardRef = forwardRef11;
+          exports.createRef = createRef5;
+          exports.forwardRef = forwardRef10;
           exports.isValidElement = isValidElement4;
           exports.lazy = lazy;
           exports.memo = memo;
@@ -2400,9 +2400,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React47 = require_react();
+          var React42 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React47.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React42.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -2451,7 +2451,7 @@
           var HostPortal = 4;
           var HostComponent = 5;
           var HostText = 6;
-          var Fragment10 = 7;
+          var Fragment9 = 7;
           var Mode = 8;
           var ContextConsumer = 9;
           var ContextProvider = 10;
@@ -3438,8 +3438,8 @@
               return describeNativeComponentFrame(fn, false);
             }
           }
-          function shouldConstruct(Component12) {
-            var prototype = Component12.prototype;
+          function shouldConstruct(Component9) {
+            var prototype = Component9.prototype;
             return !!(prototype && prototype.isReactComponent);
           }
           function describeUnknownElementTypeFrameInDEV(type, source, ownerFn) {
@@ -3608,7 +3608,7 @@
                 return "DehydratedFragment";
               case ForwardRef:
                 return getWrappedName$1(type, type.render, "ForwardRef");
-              case Fragment10:
+              case Fragment9:
                 return "Fragment";
               case HostComponent:
                 return type;
@@ -4009,7 +4009,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React47.Children.forEach(props.children, function(child) {
+                  React42.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -9433,7 +9433,7 @@
               }
             }
           }
-          function createElement36(type, props, rootContainerElement, parentNamespace) {
+          function createElement31(type, props, rootContainerElement, parentNamespace) {
             var isCustomComponentTag;
             var ownerDocument = getOwnerDocumentFromRootContainer(rootContainerElement);
             var domElement;
@@ -10303,7 +10303,7 @@
               }
               parentNamespace = hostContextDev.namespace;
             }
-            var domElement = createElement36(type, props, rootContainerInstance, parentNamespace);
+            var domElement = createElement31(type, props, rootContainerInstance, parentNamespace);
             precacheFiberNode(internalInstanceHandle, domElement);
             updateFiberProps(domElement, props);
             return domElement;
@@ -10902,9 +10902,9 @@
           var contextStackCursor = createCursor(emptyContextObject);
           var didPerformWorkStackCursor = createCursor(false);
           var previousContext = emptyContextObject;
-          function getUnmaskedContext(workInProgress2, Component12, didPushOwnContextIfProvider) {
+          function getUnmaskedContext(workInProgress2, Component9, didPushOwnContextIfProvider) {
             {
-              if (didPushOwnContextIfProvider && isContextProvider(Component12)) {
+              if (didPushOwnContextIfProvider && isContextProvider(Component9)) {
                 return previousContext;
               }
               return contextStackCursor.current;
@@ -11041,8 +11041,8 @@
                   case HostRoot:
                     return node.stateNode.context;
                   case ClassComponent: {
-                    var Component12 = node.type;
-                    if (isContextProvider(Component12)) {
+                    var Component9 = node.type;
+                    if (isContextProvider(Component9)) {
                       return node.stateNode.__reactInternalMemoizedMergedChildContext;
                     }
                     break;
@@ -12037,7 +12037,7 @@
               }
             }
             function updateFragment2(returnFiber, current2, fragment, lanes, key) {
-              if (current2 === null || current2.tag !== Fragment10) {
+              if (current2 === null || current2.tag !== Fragment9) {
                 var created = createFiberFromFragment(fragment, returnFiber.mode, lanes, key);
                 created.return = returnFiber;
                 return created;
@@ -12440,7 +12440,7 @@
                 if (child.key === key) {
                   var elementType = element.type;
                   if (elementType === REACT_FRAGMENT_TYPE) {
-                    if (child.tag === Fragment10) {
+                    if (child.tag === Fragment9) {
                       deleteRemainingChildren(returnFiber, child.sibling);
                       var existing = useFiber(child, element.props.children);
                       existing.return = returnFiber;
@@ -13496,7 +13496,7 @@
             }
             return true;
           }
-          function renderWithHooks(current2, workInProgress2, Component12, props, secondArg, nextRenderLanes) {
+          function renderWithHooks(current2, workInProgress2, Component9, props, secondArg, nextRenderLanes) {
             renderLanes = nextRenderLanes;
             currentlyRenderingFiber$1 = workInProgress2;
             {
@@ -13516,7 +13516,7 @@
                 ReactCurrentDispatcher$1.current = HooksDispatcherOnMountInDEV;
               }
             }
-            var children = Component12(props, secondArg);
+            var children = Component9(props, secondArg);
             if (didScheduleRenderPhaseUpdateDuringThisPass) {
               var numberOfReRenders = 0;
               do {
@@ -13536,7 +13536,7 @@
                   hookTypesUpdateIndexDev = -1;
                 }
                 ReactCurrentDispatcher$1.current = HooksDispatcherOnRerenderInDEV;
-                children = Component12(props, secondArg);
+                children = Component9(props, secondArg);
               } while (didScheduleRenderPhaseUpdateDuringThisPass);
             }
             ReactCurrentDispatcher$1.current = ContextOnlyDispatcher;
@@ -15335,10 +15335,10 @@
               child = child.sibling;
             }
           }
-          function resolveDefaultProps(Component12, baseProps) {
-            if (Component12 && Component12.defaultProps) {
+          function resolveDefaultProps(Component9, baseProps) {
+            if (Component9 && Component9.defaultProps) {
               var props = assign({}, baseProps);
-              var defaultProps = Component12.defaultProps;
+              var defaultProps = Component9.defaultProps;
               for (var propName in defaultProps) {
                 if (props[propName] === void 0) {
                   props[propName] = defaultProps[propName];
@@ -16267,22 +16267,22 @@
             workInProgress2.child = reconcileChildFibers(workInProgress2, current2.child, null, renderLanes2);
             workInProgress2.child = reconcileChildFibers(workInProgress2, null, nextChildren, renderLanes2);
           }
-          function updateForwardRef(current2, workInProgress2, Component12, nextProps, renderLanes2) {
+          function updateForwardRef(current2, workInProgress2, Component9, nextProps, renderLanes2) {
             {
               if (workInProgress2.type !== workInProgress2.elementType) {
-                var innerPropTypes = Component12.propTypes;
+                var innerPropTypes = Component9.propTypes;
                 if (innerPropTypes) {
                   checkPropTypes(
                     innerPropTypes,
                     nextProps,
                     // Resolved props
                     "prop",
-                    getComponentNameFromType(Component12)
+                    getComponentNameFromType(Component9)
                   );
                 }
               }
             }
-            var render2 = Component12.render;
+            var render2 = Component9.render;
             var ref = workInProgress2.ref;
             var nextChildren;
             var hasId;
@@ -16320,11 +16320,11 @@
             reconcileChildren(current2, workInProgress2, nextChildren, renderLanes2);
             return workInProgress2.child;
           }
-          function updateMemoComponent(current2, workInProgress2, Component12, nextProps, renderLanes2) {
+          function updateMemoComponent(current2, workInProgress2, Component9, nextProps, renderLanes2) {
             if (current2 === null) {
-              var type = Component12.type;
-              if (isSimpleFunctionComponent(type) && Component12.compare === null && // SimpleMemoComponent codepath doesn't resolve outer props either.
-              Component12.defaultProps === void 0) {
+              var type = Component9.type;
+              if (isSimpleFunctionComponent(type) && Component9.compare === null && // SimpleMemoComponent codepath doesn't resolve outer props either.
+              Component9.defaultProps === void 0) {
                 var resolvedType = type;
                 {
                   resolvedType = resolveFunctionForHotReloading(type);
@@ -16347,7 +16347,7 @@
                     getComponentNameFromType(type)
                   );
                 }
-                if (Component12.defaultProps !== void 0) {
+                if (Component9.defaultProps !== void 0) {
                   var componentName = getComponentNameFromType(type) || "Unknown";
                   if (!didWarnAboutDefaultPropsOnFunctionComponent[componentName]) {
                     error("%s: Support for defaultProps will be removed from memo components in a future major release. Use JavaScript default parameters instead.", componentName);
@@ -16355,14 +16355,14 @@
                   }
                 }
               }
-              var child = createFiberFromTypeAndProps(Component12.type, null, nextProps, workInProgress2, workInProgress2.mode, renderLanes2);
+              var child = createFiberFromTypeAndProps(Component9.type, null, nextProps, workInProgress2, workInProgress2.mode, renderLanes2);
               child.ref = workInProgress2.ref;
               child.return = workInProgress2;
               workInProgress2.child = child;
               return child;
             }
             {
-              var _type = Component12.type;
+              var _type = Component9.type;
               var _innerPropTypes = _type.propTypes;
               if (_innerPropTypes) {
                 checkPropTypes(
@@ -16378,7 +16378,7 @@
             var hasScheduledUpdateOrContext = checkScheduledUpdateOrContext(current2, renderLanes2);
             if (!hasScheduledUpdateOrContext) {
               var prevProps = currentChild.memoizedProps;
-              var compare = Component12.compare;
+              var compare = Component9.compare;
               compare = compare !== null ? compare : shallowEqual;
               if (compare(prevProps, nextProps) && current2.ref === workInProgress2.ref) {
                 return bailoutOnAlreadyFinishedWork(current2, workInProgress2, renderLanes2);
@@ -16391,7 +16391,7 @@
             workInProgress2.child = newChild;
             return newChild;
           }
-          function updateSimpleMemoComponent(current2, workInProgress2, Component12, nextProps, renderLanes2) {
+          function updateSimpleMemoComponent(current2, workInProgress2, Component9, nextProps, renderLanes2) {
             {
               if (workInProgress2.type !== workInProgress2.elementType) {
                 var outerMemoType = workInProgress2.elementType;
@@ -16431,7 +16431,7 @@
                 }
               }
             }
-            return updateFunctionComponent(current2, workInProgress2, Component12, nextProps, renderLanes2);
+            return updateFunctionComponent(current2, workInProgress2, Component9, nextProps, renderLanes2);
           }
           function updateOffscreenComponent(current2, workInProgress2, renderLanes2) {
             var nextProps = workInProgress2.pendingProps;
@@ -16521,24 +16521,24 @@
               }
             }
           }
-          function updateFunctionComponent(current2, workInProgress2, Component12, nextProps, renderLanes2) {
+          function updateFunctionComponent(current2, workInProgress2, Component9, nextProps, renderLanes2) {
             {
               if (workInProgress2.type !== workInProgress2.elementType) {
-                var innerPropTypes = Component12.propTypes;
+                var innerPropTypes = Component9.propTypes;
                 if (innerPropTypes) {
                   checkPropTypes(
                     innerPropTypes,
                     nextProps,
                     // Resolved props
                     "prop",
-                    getComponentNameFromType(Component12)
+                    getComponentNameFromType(Component9)
                   );
                 }
               }
             }
             var context;
             {
-              var unmaskedContext = getUnmaskedContext(workInProgress2, Component12, true);
+              var unmaskedContext = getUnmaskedContext(workInProgress2, Component9, true);
               context = getMaskedContext(workInProgress2, unmaskedContext);
             }
             var nextChildren;
@@ -16550,12 +16550,12 @@
             {
               ReactCurrentOwner$1.current = workInProgress2;
               setIsRendering(true);
-              nextChildren = renderWithHooks(current2, workInProgress2, Component12, nextProps, context, renderLanes2);
+              nextChildren = renderWithHooks(current2, workInProgress2, Component9, nextProps, context, renderLanes2);
               hasId = checkDidRenderIdHook();
               if (workInProgress2.mode & StrictLegacyMode) {
                 setIsStrictModeForDevtools(true);
                 try {
-                  nextChildren = renderWithHooks(current2, workInProgress2, Component12, nextProps, context, renderLanes2);
+                  nextChildren = renderWithHooks(current2, workInProgress2, Component9, nextProps, context, renderLanes2);
                   hasId = checkDidRenderIdHook();
                 } finally {
                   setIsStrictModeForDevtools(false);
@@ -16577,7 +16577,7 @@
             reconcileChildren(current2, workInProgress2, nextChildren, renderLanes2);
             return workInProgress2.child;
           }
-          function updateClassComponent(current2, workInProgress2, Component12, nextProps, renderLanes2) {
+          function updateClassComponent(current2, workInProgress2, Component9, nextProps, renderLanes2) {
             {
               switch (shouldError(workInProgress2)) {
                 case false: {
@@ -16600,20 +16600,20 @@
                 }
               }
               if (workInProgress2.type !== workInProgress2.elementType) {
-                var innerPropTypes = Component12.propTypes;
+                var innerPropTypes = Component9.propTypes;
                 if (innerPropTypes) {
                   checkPropTypes(
                     innerPropTypes,
                     nextProps,
                     // Resolved props
                     "prop",
-                    getComponentNameFromType(Component12)
+                    getComponentNameFromType(Component9)
                   );
                 }
               }
             }
             var hasContext;
-            if (isContextProvider(Component12)) {
+            if (isContextProvider(Component9)) {
               hasContext = true;
               pushContextProvider(workInProgress2);
             } else {
@@ -16624,15 +16624,15 @@
             var shouldUpdate;
             if (instance === null) {
               resetSuspendedCurrentOnMountInLegacyMode(current2, workInProgress2);
-              constructClassInstance(workInProgress2, Component12, nextProps);
-              mountClassInstance(workInProgress2, Component12, nextProps, renderLanes2);
+              constructClassInstance(workInProgress2, Component9, nextProps);
+              mountClassInstance(workInProgress2, Component9, nextProps, renderLanes2);
               shouldUpdate = true;
             } else if (current2 === null) {
-              shouldUpdate = resumeMountClassInstance(workInProgress2, Component12, nextProps, renderLanes2);
+              shouldUpdate = resumeMountClassInstance(workInProgress2, Component9, nextProps, renderLanes2);
             } else {
-              shouldUpdate = updateClassInstance(current2, workInProgress2, Component12, nextProps, renderLanes2);
+              shouldUpdate = updateClassInstance(current2, workInProgress2, Component9, nextProps, renderLanes2);
             }
-            var nextUnitOfWork = finishClassComponent(current2, workInProgress2, Component12, shouldUpdate, hasContext, renderLanes2);
+            var nextUnitOfWork = finishClassComponent(current2, workInProgress2, Component9, shouldUpdate, hasContext, renderLanes2);
             {
               var inst = workInProgress2.stateNode;
               if (shouldUpdate && inst.props !== nextProps) {
@@ -16644,19 +16644,19 @@
             }
             return nextUnitOfWork;
           }
-          function finishClassComponent(current2, workInProgress2, Component12, shouldUpdate, hasContext, renderLanes2) {
+          function finishClassComponent(current2, workInProgress2, Component9, shouldUpdate, hasContext, renderLanes2) {
             markRef(current2, workInProgress2);
             var didCaptureError = (workInProgress2.flags & DidCapture) !== NoFlags;
             if (!shouldUpdate && !didCaptureError) {
               if (hasContext) {
-                invalidateContextProvider(workInProgress2, Component12, false);
+                invalidateContextProvider(workInProgress2, Component9, false);
               }
               return bailoutOnAlreadyFinishedWork(current2, workInProgress2, renderLanes2);
             }
             var instance = workInProgress2.stateNode;
             ReactCurrentOwner$1.current = workInProgress2;
             var nextChildren;
-            if (didCaptureError && typeof Component12.getDerivedStateFromError !== "function") {
+            if (didCaptureError && typeof Component9.getDerivedStateFromError !== "function") {
               nextChildren = null;
               {
                 stopProfilerTimerIfRunning();
@@ -16690,7 +16690,7 @@
             }
             workInProgress2.memoizedState = instance.state;
             if (hasContext) {
-              invalidateContextProvider(workInProgress2, Component12, true);
+              invalidateContextProvider(workInProgress2, Component9, true);
             }
             return workInProgress2.child;
           }
@@ -16790,45 +16790,45 @@
             var lazyComponent = elementType;
             var payload = lazyComponent._payload;
             var init = lazyComponent._init;
-            var Component12 = init(payload);
-            workInProgress2.type = Component12;
-            var resolvedTag = workInProgress2.tag = resolveLazyComponentTag(Component12);
-            var resolvedProps = resolveDefaultProps(Component12, props);
+            var Component9 = init(payload);
+            workInProgress2.type = Component9;
+            var resolvedTag = workInProgress2.tag = resolveLazyComponentTag(Component9);
+            var resolvedProps = resolveDefaultProps(Component9, props);
             var child;
             switch (resolvedTag) {
               case FunctionComponent: {
                 {
-                  validateFunctionComponentInDev(workInProgress2, Component12);
-                  workInProgress2.type = Component12 = resolveFunctionForHotReloading(Component12);
+                  validateFunctionComponentInDev(workInProgress2, Component9);
+                  workInProgress2.type = Component9 = resolveFunctionForHotReloading(Component9);
                 }
-                child = updateFunctionComponent(null, workInProgress2, Component12, resolvedProps, renderLanes2);
+                child = updateFunctionComponent(null, workInProgress2, Component9, resolvedProps, renderLanes2);
                 return child;
               }
               case ClassComponent: {
                 {
-                  workInProgress2.type = Component12 = resolveClassForHotReloading(Component12);
+                  workInProgress2.type = Component9 = resolveClassForHotReloading(Component9);
                 }
-                child = updateClassComponent(null, workInProgress2, Component12, resolvedProps, renderLanes2);
+                child = updateClassComponent(null, workInProgress2, Component9, resolvedProps, renderLanes2);
                 return child;
               }
               case ForwardRef: {
                 {
-                  workInProgress2.type = Component12 = resolveForwardRefForHotReloading(Component12);
+                  workInProgress2.type = Component9 = resolveForwardRefForHotReloading(Component9);
                 }
-                child = updateForwardRef(null, workInProgress2, Component12, resolvedProps, renderLanes2);
+                child = updateForwardRef(null, workInProgress2, Component9, resolvedProps, renderLanes2);
                 return child;
               }
               case MemoComponent: {
                 {
                   if (workInProgress2.type !== workInProgress2.elementType) {
-                    var outerPropTypes = Component12.propTypes;
+                    var outerPropTypes = Component9.propTypes;
                     if (outerPropTypes) {
                       checkPropTypes(
                         outerPropTypes,
                         resolvedProps,
                         // Resolved for outer only
                         "prop",
-                        getComponentNameFromType(Component12)
+                        getComponentNameFromType(Component9)
                       );
                     }
                   }
@@ -16836,8 +16836,8 @@
                 child = updateMemoComponent(
                   null,
                   workInProgress2,
-                  Component12,
-                  resolveDefaultProps(Component12.type, resolvedProps),
+                  Component9,
+                  resolveDefaultProps(Component9.type, resolvedProps),
                   // The inner type can have defaults too
                   renderLanes2
                 );
@@ -16846,33 +16846,33 @@
             }
             var hint = "";
             {
-              if (Component12 !== null && typeof Component12 === "object" && Component12.$$typeof === REACT_LAZY_TYPE) {
+              if (Component9 !== null && typeof Component9 === "object" && Component9.$$typeof === REACT_LAZY_TYPE) {
                 hint = " Did you wrap a component in React.lazy() more than once?";
               }
             }
-            throw new Error("Element type is invalid. Received a promise that resolves to: " + Component12 + ". " + ("Lazy element type must resolve to a class or function." + hint));
+            throw new Error("Element type is invalid. Received a promise that resolves to: " + Component9 + ". " + ("Lazy element type must resolve to a class or function." + hint));
           }
-          function mountIncompleteClassComponent(_current, workInProgress2, Component12, nextProps, renderLanes2) {
+          function mountIncompleteClassComponent(_current, workInProgress2, Component9, nextProps, renderLanes2) {
             resetSuspendedCurrentOnMountInLegacyMode(_current, workInProgress2);
             workInProgress2.tag = ClassComponent;
             var hasContext;
-            if (isContextProvider(Component12)) {
+            if (isContextProvider(Component9)) {
               hasContext = true;
               pushContextProvider(workInProgress2);
             } else {
               hasContext = false;
             }
             prepareToReadContext(workInProgress2, renderLanes2);
-            constructClassInstance(workInProgress2, Component12, nextProps);
-            mountClassInstance(workInProgress2, Component12, nextProps, renderLanes2);
-            return finishClassComponent(null, workInProgress2, Component12, true, hasContext, renderLanes2);
+            constructClassInstance(workInProgress2, Component9, nextProps);
+            mountClassInstance(workInProgress2, Component9, nextProps, renderLanes2);
+            return finishClassComponent(null, workInProgress2, Component9, true, hasContext, renderLanes2);
           }
-          function mountIndeterminateComponent(_current, workInProgress2, Component12, renderLanes2) {
+          function mountIndeterminateComponent(_current, workInProgress2, Component9, renderLanes2) {
             resetSuspendedCurrentOnMountInLegacyMode(_current, workInProgress2);
             var props = workInProgress2.pendingProps;
             var context;
             {
-              var unmaskedContext = getUnmaskedContext(workInProgress2, Component12, false);
+              var unmaskedContext = getUnmaskedContext(workInProgress2, Component9, false);
               context = getMaskedContext(workInProgress2, unmaskedContext);
             }
             prepareToReadContext(workInProgress2, renderLanes2);
@@ -16882,8 +16882,8 @@
               markComponentRenderStarted(workInProgress2);
             }
             {
-              if (Component12.prototype && typeof Component12.prototype.render === "function") {
-                var componentName = getComponentNameFromType(Component12) || "Unknown";
+              if (Component9.prototype && typeof Component9.prototype.render === "function") {
+                var componentName = getComponentNameFromType(Component9) || "Unknown";
                 if (!didWarnAboutBadClass[componentName]) {
                   error("The <%s /> component appears to have a render method, but doesn't extend React.Component. This is likely to cause errors. Change %s to extend React.Component instead.", componentName, componentName);
                   didWarnAboutBadClass[componentName] = true;
@@ -16894,7 +16894,7 @@
               }
               setIsRendering(true);
               ReactCurrentOwner$1.current = workInProgress2;
-              value = renderWithHooks(null, workInProgress2, Component12, props, context, renderLanes2);
+              value = renderWithHooks(null, workInProgress2, Component9, props, context, renderLanes2);
               hasId = checkDidRenderIdHook();
               setIsRendering(false);
             }
@@ -16904,7 +16904,7 @@
             workInProgress2.flags |= PerformedWork;
             {
               if (typeof value === "object" && value !== null && typeof value.render === "function" && value.$$typeof === void 0) {
-                var _componentName = getComponentNameFromType(Component12) || "Unknown";
+                var _componentName = getComponentNameFromType(Component9) || "Unknown";
                 if (!didWarnAboutModulePatternComponent[_componentName]) {
                   error("The <%s /> component appears to be a function component that returns a class instance. Change %s to a class that extends React.Component instead. If you can't use a class try assigning the prototype on the function as a workaround. `%s.prototype = React.Component.prototype`. Don't use an arrow function since it cannot be called with `new` by React.", _componentName, _componentName, _componentName);
                   didWarnAboutModulePatternComponent[_componentName] = true;
@@ -16917,7 +16917,7 @@
               typeof value === "object" && value !== null && typeof value.render === "function" && value.$$typeof === void 0
             ) {
               {
-                var _componentName2 = getComponentNameFromType(Component12) || "Unknown";
+                var _componentName2 = getComponentNameFromType(Component9) || "Unknown";
                 if (!didWarnAboutModulePatternComponent[_componentName2]) {
                   error("The <%s /> component appears to be a function component that returns a class instance. Change %s to a class that extends React.Component instead. If you can't use a class try assigning the prototype on the function as a workaround. `%s.prototype = React.Component.prototype`. Don't use an arrow function since it cannot be called with `new` by React.", _componentName2, _componentName2, _componentName2);
                   didWarnAboutModulePatternComponent[_componentName2] = true;
@@ -16927,7 +16927,7 @@
               workInProgress2.memoizedState = null;
               workInProgress2.updateQueue = null;
               var hasContext = false;
-              if (isContextProvider(Component12)) {
+              if (isContextProvider(Component9)) {
                 hasContext = true;
                 pushContextProvider(workInProgress2);
               } else {
@@ -16936,15 +16936,15 @@
               workInProgress2.memoizedState = value.state !== null && value.state !== void 0 ? value.state : null;
               initializeUpdateQueue(workInProgress2);
               adoptClassInstance(workInProgress2, value);
-              mountClassInstance(workInProgress2, Component12, props, renderLanes2);
-              return finishClassComponent(null, workInProgress2, Component12, true, hasContext, renderLanes2);
+              mountClassInstance(workInProgress2, Component9, props, renderLanes2);
+              return finishClassComponent(null, workInProgress2, Component9, true, hasContext, renderLanes2);
             } else {
               workInProgress2.tag = FunctionComponent;
               {
                 if (workInProgress2.mode & StrictLegacyMode) {
                   setIsStrictModeForDevtools(true);
                   try {
-                    value = renderWithHooks(null, workInProgress2, Component12, props, context, renderLanes2);
+                    value = renderWithHooks(null, workInProgress2, Component9, props, context, renderLanes2);
                     hasId = checkDidRenderIdHook();
                   } finally {
                     setIsStrictModeForDevtools(false);
@@ -16956,16 +16956,16 @@
               }
               reconcileChildren(null, workInProgress2, value, renderLanes2);
               {
-                validateFunctionComponentInDev(workInProgress2, Component12);
+                validateFunctionComponentInDev(workInProgress2, Component9);
               }
               return workInProgress2.child;
             }
           }
-          function validateFunctionComponentInDev(workInProgress2, Component12) {
+          function validateFunctionComponentInDev(workInProgress2, Component9) {
             {
-              if (Component12) {
-                if (Component12.childContextTypes) {
-                  error("%s(...): childContextTypes cannot be defined on a function component.", Component12.displayName || Component12.name || "Component");
+              if (Component9) {
+                if (Component9.childContextTypes) {
+                  error("%s(...): childContextTypes cannot be defined on a function component.", Component9.displayName || Component9.name || "Component");
                 }
               }
               if (workInProgress2.ref !== null) {
@@ -16984,22 +16984,22 @@
                   error("Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?%s", info);
                 }
               }
-              if (Component12.defaultProps !== void 0) {
-                var componentName = getComponentNameFromType(Component12) || "Unknown";
+              if (Component9.defaultProps !== void 0) {
+                var componentName = getComponentNameFromType(Component9) || "Unknown";
                 if (!didWarnAboutDefaultPropsOnFunctionComponent[componentName]) {
                   error("%s: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.", componentName);
                   didWarnAboutDefaultPropsOnFunctionComponent[componentName] = true;
                 }
               }
-              if (typeof Component12.getDerivedStateFromProps === "function") {
-                var _componentName3 = getComponentNameFromType(Component12) || "Unknown";
+              if (typeof Component9.getDerivedStateFromProps === "function") {
+                var _componentName3 = getComponentNameFromType(Component9) || "Unknown";
                 if (!didWarnAboutGetDerivedStateOnFunctionComponent[_componentName3]) {
                   error("%s: Function components do not support getDerivedStateFromProps.", _componentName3);
                   didWarnAboutGetDerivedStateOnFunctionComponent[_componentName3] = true;
                 }
               }
-              if (typeof Component12.contextType === "object" && Component12.contextType !== null) {
-                var _componentName4 = getComponentNameFromType(Component12) || "Unknown";
+              if (typeof Component9.contextType === "object" && Component9.contextType !== null) {
+                var _componentName4 = getComponentNameFromType(Component9) || "Unknown";
                 if (!didWarnAboutContextTypeOnFunctionComponent[_componentName4]) {
                   error("%s: Function components do not support contextType.", _componentName4);
                   didWarnAboutContextTypeOnFunctionComponent[_componentName4] = true;
@@ -17761,8 +17761,8 @@
                 pushHostContext(workInProgress2);
                 break;
               case ClassComponent: {
-                var Component12 = workInProgress2.type;
-                if (isContextProvider(Component12)) {
+                var Component9 = workInProgress2.type;
+                if (isContextProvider(Component9)) {
                   pushContextProvider(workInProgress2);
                 }
                 break;
@@ -17889,10 +17889,10 @@
                 return mountLazyComponent(current2, workInProgress2, elementType, renderLanes2);
               }
               case FunctionComponent: {
-                var Component12 = workInProgress2.type;
+                var Component9 = workInProgress2.type;
                 var unresolvedProps = workInProgress2.pendingProps;
-                var resolvedProps = workInProgress2.elementType === Component12 ? unresolvedProps : resolveDefaultProps(Component12, unresolvedProps);
-                return updateFunctionComponent(current2, workInProgress2, Component12, resolvedProps, renderLanes2);
+                var resolvedProps = workInProgress2.elementType === Component9 ? unresolvedProps : resolveDefaultProps(Component9, unresolvedProps);
+                return updateFunctionComponent(current2, workInProgress2, Component9, resolvedProps, renderLanes2);
               }
               case ClassComponent: {
                 var _Component = workInProgress2.type;
@@ -17916,7 +17916,7 @@
                 var _resolvedProps2 = workInProgress2.elementType === type ? _unresolvedProps2 : resolveDefaultProps(type, _unresolvedProps2);
                 return updateForwardRef(current2, workInProgress2, type, _resolvedProps2, renderLanes2);
               }
-              case Fragment10:
+              case Fragment9:
                 return updateFragment(current2, workInProgress2, renderLanes2);
               case Mode:
                 return updateMode(current2, workInProgress2, renderLanes2);
@@ -18188,7 +18188,7 @@
               case SimpleMemoComponent:
               case FunctionComponent:
               case ForwardRef:
-              case Fragment10:
+              case Fragment9:
               case Mode:
               case Profiler:
               case ContextConsumer:
@@ -18196,8 +18196,8 @@
                 bubbleProperties(workInProgress2);
                 return null;
               case ClassComponent: {
-                var Component12 = workInProgress2.type;
-                if (isContextProvider(Component12)) {
+                var Component9 = workInProgress2.type;
+                if (isContextProvider(Component9)) {
                   popContext(workInProgress2);
                 }
                 bubbleProperties(workInProgress2);
@@ -18515,8 +18515,8 @@
             popTreeContext(workInProgress2);
             switch (workInProgress2.tag) {
               case ClassComponent: {
-                var Component12 = workInProgress2.type;
-                if (isContextProvider(Component12)) {
+                var Component9 = workInProgress2.type;
+                if (isContextProvider(Component9)) {
                   popContext(workInProgress2);
                 }
                 var flags = workInProgress2.flags;
@@ -22201,18 +22201,18 @@
           var createFiber = function(tag, pendingProps, key, mode) {
             return new FiberNode(tag, pendingProps, key, mode);
           };
-          function shouldConstruct$1(Component12) {
-            var prototype = Component12.prototype;
+          function shouldConstruct$1(Component9) {
+            var prototype = Component9.prototype;
             return !!(prototype && prototype.isReactComponent);
           }
           function isSimpleFunctionComponent(type) {
             return typeof type === "function" && !shouldConstruct$1(type) && type.defaultProps === void 0;
           }
-          function resolveLazyComponentTag(Component12) {
-            if (typeof Component12 === "function") {
-              return shouldConstruct$1(Component12) ? ClassComponent : FunctionComponent;
-            } else if (Component12 !== void 0 && Component12 !== null) {
-              var $$typeof = Component12.$$typeof;
+          function resolveLazyComponentTag(Component9) {
+            if (typeof Component9 === "function") {
+              return shouldConstruct$1(Component9) ? ClassComponent : FunctionComponent;
+            } else if (Component9 !== void 0 && Component9 !== null) {
+              var $$typeof = Component9.$$typeof;
               if ($$typeof === REACT_FORWARD_REF_TYPE) {
                 return ForwardRef;
               }
@@ -22449,7 +22449,7 @@
             return fiber;
           }
           function createFiberFromFragment(elements, mode, lanes, key) {
-            var fiber = createFiber(Fragment10, elements, key, mode);
+            var fiber = createFiber(Fragment9, elements, key, mode);
             fiber.lanes = lanes;
             return fiber;
           }
@@ -22653,9 +22653,9 @@
             var fiber = get(parentComponent);
             var parentContext = findCurrentUnmaskedContext(fiber);
             if (fiber.tag === ClassComponent) {
-              var Component12 = fiber.type;
-              if (isContextProvider(Component12)) {
-                return processChildContext(fiber, Component12, parentContext);
+              var Component9 = fiber.type;
+              if (isContextProvider(Component9)) {
+                return processChildContext(fiber, Component9, parentContext);
               }
             }
             return parentContext;
@@ -23942,72 +23942,8 @@
     const uid2 = (/* @__PURE__ */ new Date()).getTime() + Math.random().toString(36).slice(2);
     return `${prefix}-${uid2}`;
   }
-  function debounce(func, wait) {
-    let timeout;
-    return (...args) => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func.apply(this, args), wait);
-    };
-  }
   var setBreakpointCssVars = (mods, cssVar) => Object.entries(mods || {}).reduce((acc, [breakpoint, value]) => breakpoint === "default" ? Object.assign(Object.assign({}, acc), { [cssVar]: value }) : Object.assign(Object.assign({}, acc), { [`${cssVar}-on-${breakpoint}`]: value }), {});
   var canUseDOM = !!(typeof window !== "undefined" && window.document && window.document.createElement);
-  var getTextWidth = (text, node) => {
-    const computedStyle = getComputedStyle(node);
-    const getFontFromComputedStyle = () => {
-      let computedFont = "";
-      const fontStretchLookupTable = {
-        "50%": "ultra-condensed",
-        "62.5%": "extra-condensed",
-        "75%": "condensed",
-        "87.5%": "semi-condensed",
-        "100%": "normal",
-        "112.5%": "semi-expanded",
-        "125%": "expanded",
-        "150%": "extra-expanded",
-        "200%": "ultra-expanded"
-      };
-      let fontStretch;
-      if (computedStyle.fontStretch in fontStretchLookupTable) {
-        fontStretch = fontStretchLookupTable[computedStyle.fontStretch];
-      } else {
-        fontStretch = "normal";
-      }
-      computedFont = computedStyle.fontStyle + " " + computedStyle.fontVariant + " " + computedStyle.fontWeight + " " + fontStretch + " " + computedStyle.fontSize + "/" + computedStyle.lineHeight + " " + computedStyle.fontFamily;
-      return computedFont;
-    };
-    const canvas = document.createElement("canvas");
-    const context = canvas.getContext("2d");
-    context.font = computedStyle.font || getFontFromComputedStyle();
-    return context.measureText(text).width;
-  };
-  var innerDimensions = (node) => {
-    const computedStyle = getComputedStyle(node);
-    let width = node.clientWidth;
-    let height = node.clientHeight;
-    height -= parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom);
-    width -= parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight);
-    return { height, width };
-  };
-  var trimLeft = (node, value) => {
-    const availableWidth = innerDimensions(node).width;
-    let newValue = value;
-    if (getTextWidth(value, node) > availableWidth) {
-      while (getTextWidth(`...${newValue}`, node) > availableWidth) {
-        newValue = newValue.substring(1);
-      }
-      if (node.value) {
-        node.value = `...${newValue}`;
-      } else {
-        node.innerText = `...${newValue}`;
-      }
-    } else {
-      if (node.value) {
-        node.value = value;
-      } else {
-        node.innerText = value;
-      }
-    }
-  };
   var clearTimeouts = (timeoutRefs) => {
     timeoutRefs.forEach((ref) => {
       if (ref.current) {
@@ -24376,7 +24312,7 @@
   }
 
   // node_modules/@patternfly/react-core/dist/esm/helpers/Popper/thirdparty/popper-core/utils/debounce.js
-  function debounce2(fn) {
+  function debounce(fn) {
     let pending;
     return () => {
       if (!pending) {
@@ -24740,7 +24676,7 @@
         },
         // Async and optimistically optimized update – it will not be executed if
         // not necessary (debounced to run at most once-per-tick)
-        update: debounce2(() => new Promise((resolve) => {
+        update: debounce(() => new Promise((resolve) => {
           instance.forceUpdate();
           resolve(state);
         })),
@@ -25900,39 +25836,6 @@
     noSpaceHandling: false
   };
 
-  // node_modules/@patternfly/react-core/dist/esm/helpers/resizeObserver.js
-  var getResizeObserver = (containerRefElement, handleResize, useRequestAnimationFrame) => {
-    let unobserve;
-    if (canUseDOM) {
-      const { ResizeObserver } = window;
-      if (containerRefElement && ResizeObserver) {
-        const resizeObserver = new ResizeObserver((entries) => {
-          if (useRequestAnimationFrame) {
-            window.requestAnimationFrame(() => {
-              if (Array.isArray(entries) && entries.length > 0) {
-                debounce(handleResize, 100);
-              }
-            });
-          } else {
-            if (Array.isArray(entries) && entries.length > 0) {
-              handleResize();
-            }
-          }
-        });
-        resizeObserver.observe(containerRefElement);
-        unobserve = () => resizeObserver.unobserve(containerRefElement);
-      } else {
-        window.addEventListener("resize", handleResize);
-        unobserve = () => window.removeEventListener("resize", handleResize);
-      }
-    }
-    return () => {
-      if (unobserve) {
-        unobserve();
-      }
-    };
-  };
-
   // node_modules/@patternfly/react-core/dist/esm/components/Alert/AlertContext.js
   var React8 = __toESM(require_react());
   var AlertContext = React8.createContext(null);
@@ -26287,9 +26190,9 @@
   var ButtonBase = (_a) => {
     var { children = null, className = "", component = "button", isClicked = false, isBlock = false, isDisabled = false, isAriaDisabled = false, isLoading = null, isDanger = false, spinnerAriaValueText, spinnerAriaLabelledBy, spinnerAriaLabel, size = ButtonSize.default, inoperableEvents = ["onClick", "onKeyPress"], isInline = false, type = ButtonType.button, variant = ButtonVariant.primary, state = ButtonState.unread, hasNoPadding = false, iconPosition = "start", "aria-label": ariaLabel = null, icon = null, role, ouiaId, ouiaSafe = true, tabIndex = null, innerRef, countOptions } = _a, props = __rest(_a, ["children", "className", "component", "isClicked", "isBlock", "isDisabled", "isAriaDisabled", "isLoading", "isDanger", "spinnerAriaValueText", "spinnerAriaLabelledBy", "spinnerAriaLabel", "size", "inoperableEvents", "isInline", "type", "variant", "state", "hasNoPadding", "iconPosition", "aria-label", "icon", "role", "ouiaId", "ouiaSafe", "tabIndex", "innerRef", "countOptions"]);
     const ouiaProps = useOUIAProps(Button.displayName, ouiaId, ouiaSafe, variant);
-    const Component12 = component;
-    const isButtonElement = Component12 === "button";
-    const isInlineSpan = isInline && Component12 === "span";
+    const Component9 = component;
+    const isButtonElement = Component9 === "button";
+    const isInlineSpan = isInline && Component9 === "span";
     const isIconAlignedAtEnd = iconPosition === "end" || iconPosition === "right";
     const preventedEvents = inoperableEvents.reduce((handlers, eventToPrevent) => Object.assign(Object.assign({}, handlers), { [eventToPrevent]: (event) => {
       event.preventDefault();
@@ -26306,7 +26209,7 @@
     const _icon = icon && React14.createElement("span", { className: css(button_default.buttonIcon, children && button_default.modifiers[isIconAlignedAtEnd ? "end" : "start"]) }, icon);
     const _children = children && React14.createElement("span", { className: css("pf-v6-c-button__text") }, children);
     return React14.createElement(
-      Component12,
+      Component9,
       Object.assign({}, props, isAriaDisabled ? preventedEvents : null, { "aria-disabled": isAriaDisabled || !isButtonElement && isDisabled, "aria-label": ariaLabel, className: css(button_default.button, button_default.modifiers[variant], isBlock && button_default.modifiers.block, isDisabled && !isButtonElement && button_default.modifiers.disabled, isAriaDisabled && button_default.modifiers.ariaDisabled, isClicked && button_default.modifiers.clicked, isInline && variant === ButtonVariant.link && button_default.modifiers.inline, isDanger && (variant === ButtonVariant.secondary || variant === ButtonVariant.link) && button_default.modifiers.danger, isLoading !== null && variant !== ButtonVariant.plain && button_default.modifiers.progress, isLoading && button_default.modifiers.inProgress, hasNoPadding && variant === ButtonVariant.plain && button_default.modifiers.noPadding, variant === ButtonVariant.stateful && button_default.modifiers[state], size === ButtonSize.sm && button_default.modifiers.small, size === ButtonSize.lg && button_default.modifiers.displayLg, className), disabled: isButtonElement ? isDisabled : null, tabIndex: tabIndex !== null ? tabIndex : getDefaultTabIdx(), type: isButtonElement || isInlineSpan ? type : null, role: isInlineSpan ? "button" : role, ref: innerRef }, ouiaProps),
       isLoading && React14.createElement(
         "span",
@@ -26532,7 +26435,7 @@
   });
   var Card = (_a) => {
     var { children, id = "", className, component = "div", isCompact = false, isSelectable = false, isClickable = false, isDisabled = false, isSelected = false, isClicked = false, isExpanded = false, isLarge = false, isFullHeight = false, isPlain = false, variant = "default", ouiaId, ouiaSafe = true } = _a, props = __rest(_a, ["children", "id", "className", "component", "isCompact", "isSelectable", "isClickable", "isDisabled", "isSelected", "isClicked", "isExpanded", "isLarge", "isFullHeight", "isPlain", "variant", "ouiaId", "ouiaSafe"]);
-    const Component12 = component;
+    const Component9 = component;
     const ouiaProps = useOUIAProps(Card.displayName, ouiaId, ouiaSafe);
     if (isCompact && isLarge) {
       console.warn("Card: Cannot use isCompact with isLarge. Defaulting to isCompact");
@@ -26561,7 +26464,7 @@
         isClicked,
         isDisabled
       } },
-      React17.createElement(Component12, Object.assign({ id, className: css(card_default.card, isCompact && card_default.modifiers.compact, isExpanded && card_default.modifiers.expanded, isLarge && card_default.modifiers.displayLg, isFullHeight && card_default.modifiers.fullHeight, isPlain && card_default.modifiers.plain, variant === "secondary" && card_default.modifiers.secondary, getSelectableModifiers(), isDisabled && card_default.modifiers.disabled, className) }, props, ouiaProps), children)
+      React17.createElement(Component9, Object.assign({ id, className: css(card_default.card, isCompact && card_default.modifiers.compact, isExpanded && card_default.modifiers.expanded, isLarge && card_default.modifiers.displayLg, isFullHeight && card_default.modifiers.fullHeight, isPlain && card_default.modifiers.plain, variant === "secondary" && card_default.modifiers.secondary, getSelectableModifiers(), isDisabled && card_default.modifiers.disabled, className) }, props, ouiaProps), children)
     );
   };
   Card.displayName = "Card";
@@ -26570,8 +26473,8 @@
   var React18 = __toESM(require_react());
   var CardBody = (_a) => {
     var { children, className, component = "div", isFilled = true } = _a, props = __rest(_a, ["children", "className", "component", "isFilled"]);
-    const Component12 = component;
-    return React18.createElement(Component12, Object.assign({ className: css(card_default.cardBody, !isFilled && card_default.modifiers.noFill, className) }, props), children);
+    const Component9 = component;
+    return React18.createElement(Component9, Object.assign({ className: css(card_default.cardBody, !isFilled && card_default.modifiers.noFill, className) }, props), children);
   };
   CardBody.displayName = "CardBody";
 
@@ -26580,12 +26483,12 @@
   var CardTitle = (_a) => {
     var { children, className, component = "div" } = _a, props = __rest(_a, ["children", "className", "component"]);
     const { cardId } = React19.useContext(CardContext);
-    const Component12 = component;
+    const Component9 = component;
     const titleId = cardId ? `${cardId}-title` : "";
     return React19.createElement(
       "div",
       { className: css(card_default.cardTitle) },
-      React19.createElement(Component12, Object.assign({ className: css(card_default.cardTitleText, className), id: titleId || void 0 }, props), children)
+      React19.createElement(Component9, Object.assign({ className: css(card_default.cardTitleText, className), id: titleId || void 0 }, props), children)
     );
   };
   CardTitle.displayName = "CardTitle";
@@ -26644,10 +26547,10 @@
         label,
         isRequired && React20.createElement("span", { className: css(check_default.checkLabelRequired), "aria-hidden": "true" }, ASTERISK)
       ) : null;
-      const Component12 = component !== null && component !== void 0 ? component : wrapWithLabel ? "label" : "div";
+      const Component9 = component !== null && component !== void 0 ? component : wrapWithLabel ? "label" : "div";
       checkedProps.checked = checkedProps.checked === null ? false : checkedProps.checked;
       return React20.createElement(
-        Component12,
+        Component9,
         { className: css(check_default.check, !label && check_default.modifiers.standalone, className), htmlFor: wrapWithLabel ? props.id : void 0 },
         labelPosition === "start" ? React20.createElement(
           React20.Fragment,
@@ -27235,9 +27138,9 @@
     var { children, className, itemId = null, to, hasCheckbox = false, isActive = null, isFavorited = null, isLoadButton = false, isLoading = false, flyoutMenu, direction, description = null, onClick = () => {
     }, component = "button", isDisabled = false, isAriaDisabled = false, isExternalLink = false, isSelected = null, isFocused, isDanger = false, icon, actions, onShowFlyout, drilldownMenu, isOnPath, innerRef, id, "aria-label": ariaLabel, tooltipProps, rel, target, download } = _a, props = __rest(_a, ["children", "className", "itemId", "to", "hasCheckbox", "isActive", "isFavorited", "isLoadButton", "isLoading", "flyoutMenu", "direction", "description", "onClick", "component", "isDisabled", "isAriaDisabled", "isExternalLink", "isSelected", "isFocused", "isDanger", "icon", "actions", "onShowFlyout", "drilldownMenu", "isOnPath", "innerRef", "id", "aria-label", "tooltipProps", "rel", "target", "download"]);
     const { menuId, parentMenu, onSelect, onActionClick, activeItemId, selected, drilldownItemPath, onDrillIn, onDrillOut, flyoutRef, setFlyoutRef, disableHover, role: menuRole } = React27.useContext(MenuContext);
-    let Component12 = to ? "a" : component;
+    let Component9 = to ? "a" : component;
     if (hasCheckbox && !to) {
-      Component12 = "label";
+      Component9 = "label";
     }
     const [flyoutTarget, setFlyoutTarget] = React27.useState(null);
     const flyoutContext = React27.useContext(FlyoutContext);
@@ -27339,7 +27242,7 @@
       }
     }
     let additionalProps = {};
-    if (Component12 === "a") {
+    if (Component9 === "a") {
       additionalProps = {
         href: to,
         "aria-disabled": isDisabled || isAriaDisabled ? true : null,
@@ -27349,7 +27252,7 @@
         rel,
         download
       };
-    } else if (Component12 === "button") {
+    } else if (Component9 === "button") {
       additionalProps = {
         type: "button",
         "aria-disabled": isAriaDisabled ? true : null
@@ -27409,7 +27312,7 @@
       React27.Fragment,
       null,
       React27.createElement(GenerateId, null, (randomId) => React27.createElement(
-        Component12,
+        Component9,
         Object.assign({ id, tabIndex: -1, className: css(menu_default.menuItem, getIsSelected() && !hasCheckbox && menu_default.modifiers.selected, className), "aria-current": getAriaCurrent() }, !hasCheckbox && { disabled: isDisabled, "aria-label": ariaLabel }, !hasCheckbox && !flyoutMenu && { role: isSelectMenu ? "option" : "menuitem" }, !hasCheckbox && !flyoutMenu && isSelectMenu && { "aria-selected": getIsSelected() }, { ref: innerRef }, !hasCheckbox && {
           onClick: (event) => {
             if (!isAriaDisabled) {
@@ -28056,7 +27959,7 @@
   var Grid = (_a) => {
     var { children = null, className = "", component = "div", hasGutter, span = null, order: order2, style } = _a, props = __rest(_a, ["children", "className", "component", "hasGutter", "span", "order", "style"]);
     const classes = [grid_default.grid, span && grid_default.modifiers[`all_${span}Col`]];
-    const Component12 = component;
+    const Component9 = component;
     Object.entries(DeviceSizes).forEach(([propKey, gridSpanModifier]) => {
       const key = propKey;
       const propValue = props[key];
@@ -28065,7 +27968,7 @@
       }
       delete props[key];
     });
-    return React33.createElement(Component12, Object.assign({ className: css(...classes, hasGutter && grid_default.modifiers.gutter, className), style: style || order2 ? Object.assign(Object.assign({}, style), setBreakpointCssVars(order2, l_grid_item_Order.name)) : void 0 }, props), children);
+    return React33.createElement(Component9, Object.assign({ className: css(...classes, hasGutter && grid_default.modifiers.gutter, className), style: style || order2 ? Object.assign(Object.assign({}, style), setBreakpointCssVars(order2, l_grid_item_Order.name)) : void 0 }, props), children);
   };
   Grid.displayName = "Grid";
 
@@ -28079,7 +27982,7 @@
       rowSpan && grid_default.modifiers[`${rowSpan}Row`],
       offset2 && grid_default.modifiers[`offset_${offset2}Col`]
     ];
-    const Component12 = component;
+    const Component9 = component;
     Object.entries(DeviceSizes).forEach(([propKey, classModifier]) => {
       const key = propKey;
       const rowSpanKey = `${key}RowSpan`;
@@ -28100,7 +28003,7 @@
       delete props[rowSpanKey];
       delete props[offsetKey];
     });
-    return React34.createElement(Component12, Object.assign({ className: css(...classes, className), style: style || order2 ? Object.assign(Object.assign({}, style), setBreakpointCssVars(order2, l_grid_item_Order.name)) : void 0 }, props), children);
+    return React34.createElement(Component9, Object.assign({ className: css(...classes, className), style: style || order2 ? Object.assign(Object.assign({}, style), setBreakpointCssVars(order2, l_grid_item_Order.name)) : void 0 }, props), children);
   };
   GridItem.displayName = "GridItem";
 
@@ -28273,369 +28176,8 @@
   };
   InputGroupItem.displayName = "InputGroupItem";
 
-  // node_modules/@patternfly/react-core/dist/esm/components/ClipboardCopy/ClipboardCopy.js
-  var React43 = __toESM(require_react());
-
-  // node_modules/@patternfly/react-styles/css/components/ClipboardCopy/clipboard-copy.mjs
-  var clipboard_copy_default = {
-    "button": "pf-v6-c-button",
-    "clipboardCopy": "pf-v6-c-clipboard-copy",
-    "clipboardCopyActions": "pf-v6-c-clipboard-copy__actions",
-    "clipboardCopyActionsItem": "pf-v6-c-clipboard-copy__actions-item",
-    "clipboardCopyExpandableContent": "pf-v6-c-clipboard-copy__expandable-content",
-    "clipboardCopyGroup": "pf-v6-c-clipboard-copy__group",
-    "clipboardCopyText": "pf-v6-c-clipboard-copy__text",
-    "clipboardCopyToggleIcon": "pf-v6-c-clipboard-copy__toggle-icon",
-    "dirRtl": "pf-v6-m-dir-rtl",
-    "modifiers": {
-      "expanded": "pf-m-expanded",
-      "inline": "pf-m-inline",
-      "block": "pf-m-block",
-      "truncate": "pf-m-truncate",
-      "code": "pf-m-code",
-      "plain": "pf-m-plain"
-    }
-  };
-
-  // node_modules/@patternfly/react-core/dist/esm/components/TextInput/TextInput.js
-  var React39 = __toESM(require_react());
-  var TextInputTypes;
-  (function(TextInputTypes2) {
-    TextInputTypes2["text"] = "text";
-    TextInputTypes2["date"] = "date";
-    TextInputTypes2["datetimeLocal"] = "datetime-local";
-    TextInputTypes2["email"] = "email";
-    TextInputTypes2["month"] = "month";
-    TextInputTypes2["number"] = "number";
-    TextInputTypes2["password"] = "password";
-    TextInputTypes2["search"] = "search";
-    TextInputTypes2["tel"] = "tel";
-    TextInputTypes2["time"] = "time";
-    TextInputTypes2["url"] = "url";
-  })(TextInputTypes || (TextInputTypes = {}));
-  var TextInputReadOnlyVariant;
-  (function(TextInputReadOnlyVariant2) {
-    TextInputReadOnlyVariant2["default"] = "default";
-    TextInputReadOnlyVariant2["plain"] = "plain";
-  })(TextInputReadOnlyVariant || (TextInputReadOnlyVariant = {}));
-  var TextInputBase = class _TextInputBase extends React39.Component {
-    constructor(props) {
-      super(props);
-      this.inputRef = React39.createRef();
-      this.observer = () => {
-      };
-      this.handleChange = (event) => {
-        if (this.props.onChange) {
-          this.props.onChange(event, event.currentTarget.value);
-        }
-      };
-      this.handleResize = () => {
-        const inputRef = this.props.innerRef || this.inputRef;
-        if (inputRef && inputRef.current) {
-          trimLeft(inputRef.current, String(this.props.value));
-        }
-      };
-      this.restoreText = () => {
-        const inputRef = this.props.innerRef || this.inputRef;
-        inputRef.current.value = String(this.props.value);
-        inputRef.current.scrollLeft = inputRef.current.scrollWidth;
-      };
-      this.onFocus = (event) => {
-        const { isLeftTruncated, isStartTruncated, onFocus } = this.props;
-        if (isLeftTruncated || isStartTruncated) {
-          this.restoreText();
-        }
-        onFocus && onFocus(event);
-      };
-      this.onBlur = (event) => {
-        const { isLeftTruncated, isStartTruncated, onBlur } = this.props;
-        if (isLeftTruncated || isStartTruncated) {
-          this.handleResize();
-        }
-        onBlur && onBlur(event);
-      };
-      this.sanitizeInputValue = (value) => typeof value === "string" ? value.replace(/\n/g, " ") : value;
-      if (!props.id && !props["aria-label"] && !props["aria-labelledby"]) {
-        console.error("Text input:", "Text input requires either an id or aria-label to be specified");
-      }
-      this.state = {
-        ouiaStateId: getDefaultOUIAId(_TextInputBase.displayName)
-      };
-    }
-    componentDidMount() {
-      if (this.props.isLeftTruncated || this.props.isStartTruncated) {
-        const inputRef = this.props.innerRef || this.inputRef;
-        this.observer = getResizeObserver(inputRef.current, this.handleResize, true);
-        this.handleResize();
-      }
-    }
-    componentWillUnmount() {
-      if (this.props.isLeftTruncated || this.props.isStartTruncated) {
-        this.observer();
-      }
-    }
-    render() {
-      const _a = this.props, {
-        innerRef,
-        className,
-        type,
-        value,
-        placeholder,
-        validated,
-        /* eslint-disable @typescript-eslint/no-unused-vars */
-        onChange,
-        onFocus,
-        onBlur,
-        isLeftTruncated,
-        isStartTruncated,
-        isExpanded,
-        expandedProps,
-        readOnly,
-        readOnlyVariant,
-        isRequired,
-        isDisabled,
-        customIcon,
-        ouiaId,
-        ouiaSafe
-      } = _a, props = __rest(_a, ["innerRef", "className", "type", "value", "placeholder", "validated", "onChange", "onFocus", "onBlur", "isLeftTruncated", "isStartTruncated", "isExpanded", "expandedProps", "readOnly", "readOnlyVariant", "isRequired", "isDisabled", "customIcon", "ouiaId", "ouiaSafe"]);
-      const hasStatusIcon = ["success", "error", "warning"].includes(validated);
-      const ariaExpandedProps = expandedProps ? { "aria-expanded": expandedProps === null || expandedProps === void 0 ? void 0 : expandedProps.isExpanded, "aria-controls": expandedProps === null || expandedProps === void 0 ? void 0 : expandedProps.ariaControls, role: "combobox" } : {};
-      return React39.createElement(
-        "span",
-        { className: css(form_control_default.formControl, readOnlyVariant && form_control_default.modifiers.readonly, readOnlyVariant === "plain" && form_control_default.modifiers.plain, isDisabled && form_control_default.modifiers.disabled, (isExpanded || (expandedProps === null || expandedProps === void 0 ? void 0 : expandedProps.isExpanded)) && form_control_default.modifiers.expanded, customIcon && form_control_default.modifiers.icon, hasStatusIcon && form_control_default.modifiers[validated], className) },
-        React39.createElement("input", Object.assign({}, props, { onFocus: this.onFocus, onBlur: this.onBlur, onChange: this.handleChange, type, value: this.sanitizeInputValue(value), "aria-invalid": props["aria-invalid"] ? props["aria-invalid"] : validated === ValidatedOptions.error }, ariaExpandedProps, { required: isRequired, disabled: isDisabled, readOnly: !!readOnlyVariant || readOnly, ref: innerRef || this.inputRef, placeholder }, getOUIAProps(TextInput.displayName, ouiaId !== void 0 ? ouiaId : this.state.ouiaStateId, ouiaSafe))),
-        (customIcon || hasStatusIcon) && React39.createElement(
-          "span",
-          { className: css(form_control_default.formControlUtilities) },
-          customIcon && React39.createElement(FormControlIcon, { customIcon }),
-          hasStatusIcon && React39.createElement(FormControlIcon, { status: validated })
-        )
-      );
-    }
-  };
-  TextInputBase.displayName = "TextInputBase";
-  TextInputBase.defaultProps = {
-    "aria-label": null,
-    isRequired: false,
-    validated: "default",
-    isDisabled: false,
-    isExpanded: false,
-    type: TextInputTypes.text,
-    isLeftTruncated: false,
-    isStartTruncated: false,
-    onChange: () => void 0,
-    ouiaSafe: true
-  };
-  var TextInput = React39.forwardRef((props, ref) => React39.createElement(TextInputBase, Object.assign({}, props, { innerRef: ref })));
-  TextInput.displayName = "TextInput";
-
-  // node_modules/@patternfly/react-core/dist/esm/components/ClipboardCopy/ClipboardCopyButton.js
-  var React40 = __toESM(require_react());
-
-  // node_modules/@patternfly/react-icons/dist/esm/icons/copy-icon.js
-  var CopyIconConfig = {
-    name: "CopyIcon",
-    height: 512,
-    width: 448,
-    svgPath: "M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56h168zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24zm120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97z",
-    yOffset: 0,
-    xOffset: 0
-  };
-  var CopyIcon = createIcon(CopyIconConfig);
-  var copy_icon_default = CopyIcon;
-
-  // node_modules/@patternfly/react-core/dist/esm/components/ClipboardCopy/ClipboardCopyButton.js
-  var ClipboardCopyButton = (_a) => {
-    var { onClick, exitDelay = 0, entryDelay = 300, maxWidth = "100px", position = "top", "aria-label": ariaLabel = "Copyable input", id, textId, children, variant = "control", onTooltipHidden = () => {
-    }, className, hasNoPadding = false } = _a, props = __rest(_a, ["onClick", "exitDelay", "entryDelay", "maxWidth", "position", "aria-label", "id", "textId", "children", "variant", "onTooltipHidden", "className", "hasNoPadding"]);
-    const triggerRef = React40.createRef();
-    return React40.createElement(
-      Tooltip,
-      { trigger: "mouseenter focus click", triggerRef, exitDelay, entryDelay, maxWidth, position, "aria-live": "polite", aria: "none", content: React40.createElement("div", null, children), onTooltipHidden },
-      React40.createElement(Button, Object.assign({ type: "button", variant, hasNoPadding, onClick, "aria-label": ariaLabel, className, id, "aria-labelledby": `${id} ${textId}`, icon: React40.createElement(copy_icon_default, null) }, props, { ref: triggerRef }))
-    );
-  };
-  ClipboardCopyButton.displayName = "ClipboardCopyButton";
-
-  // node_modules/@patternfly/react-core/dist/esm/components/ClipboardCopy/ClipboardCopyToggle.js
-  var React41 = __toESM(require_react());
-  var ClipboardCopyToggle = (_a) => {
-    var { onClick, id, textId, contentId, isExpanded = false } = _a, props = __rest(_a, ["onClick", "id", "textId", "contentId", "isExpanded"]);
-    return React41.createElement(Button, Object.assign({ type: "button", variant: "control", onClick, id, "aria-labelledby": `${id} ${textId}`, "aria-controls": contentId, "aria-expanded": isExpanded }, props, { icon: React41.createElement(
-      "div",
-      { className: css(clipboard_copy_default.clipboardCopyToggleIcon) },
-      React41.createElement(angle_right_icon_default, { "aria-hidden": "true" })
-    ) }));
-  };
-  ClipboardCopyToggle.displayName = "ClipboardCopyToggle";
-
-  // node_modules/@patternfly/react-core/dist/esm/components/ClipboardCopy/ClipboardCopyExpanded.js
-  var React42 = __toESM(require_react());
-  var ClipboardCopyExpanded = class extends React42.Component {
-    constructor(props) {
-      super(props);
-    }
-    render() {
-      const _a = this.props, { className, children, onChange, isReadOnly, isCode } = _a, props = __rest(_a, ["className", "children", "onChange", "isReadOnly", "isCode"]);
-      return React42.createElement("div", Object.assign({ suppressContentEditableWarning: true, className: css(clipboard_copy_default.clipboardCopyExpandableContent, className), onInput: (e) => onChange(e, e.target.innerText), contentEditable: !isReadOnly }, props), isCode ? React42.createElement("pre", { dir: "ltr" }, children) : children);
-    }
-  };
-  ClipboardCopyExpanded.displayName = "ClipboardCopyExpanded";
-  ClipboardCopyExpanded.defaultProps = {
-    onChange: () => void 0,
-    className: "",
-    isReadOnly: false,
-    isCode: false
-  };
-
-  // node_modules/@patternfly/react-core/dist/esm/components/ClipboardCopy/ClipboardCopy.js
-  var clipboardCopyFunc = (_event, text) => {
-    try {
-      navigator.clipboard.writeText(text.toString());
-    } catch (error) {
-      console.warn("Clipboard API not found, this copy function will not work. This is likely because you're using an", "unsupported browser or you're not using HTTPS. \n\nIf you're a developer building an application which needs", "to support copying to the clipboard without the clipboard API, you'll have to create your own copy", "function and pass it to the ClipboardCopy component as the onCopy prop. For more information see", "https://developer.mozilla.org/en-US/docs/Web/API/Navigator/clipboard");
-      console.error(error);
-    }
-  };
-  var ClipboardCopyVariant;
-  (function(ClipboardCopyVariant2) {
-    ClipboardCopyVariant2["inline"] = "inline";
-    ClipboardCopyVariant2["expansion"] = "expansion";
-    ClipboardCopyVariant2["inlineCompact"] = "inline-compact";
-  })(ClipboardCopyVariant || (ClipboardCopyVariant = {}));
-  var ClipboardCopy = class _ClipboardCopy extends React43.Component {
-    constructor(props) {
-      super(props);
-      this.timer = null;
-      this.componentDidUpdate = (prevProps, prevState) => {
-        if (prevProps.children !== this.props.children) {
-          const newText = this.props.children;
-          this.setState({ text: newText, textWhenExpanded: newText });
-        }
-      };
-      this.componentWillUnmount = () => {
-        if (this.timer) {
-          window.clearTimeout(this.timer);
-        }
-      };
-      this.expandContent = (_event) => {
-        this.setState((prevState) => ({
-          expanded: !prevState.expanded
-        }));
-      };
-      this.updateText = (event, text2) => {
-        this.setState({ text: text2 });
-        this.props.onChange(event, text2);
-      };
-      this.updateTextWhenExpanded = (event, text2) => {
-        this.setState({ textWhenExpanded: text2 });
-        this.props.onChange(event, text2);
-      };
-      this.render = () => {
-        const _a = this.props, {
-          /* eslint-disable @typescript-eslint/no-unused-vars */
-          isExpanded,
-          onChange,
-          // Don't pass to <div>
-          /* eslint-enable @typescript-eslint/no-unused-vars */
-          isReadOnly,
-          isCode,
-          isBlock,
-          exitDelay,
-          maxWidth,
-          entryDelay,
-          onCopy,
-          hoverTip,
-          clickTip,
-          textAriaLabel,
-          toggleAriaLabel,
-          variant,
-          position,
-          className,
-          additionalActions,
-          ouiaId,
-          ouiaSafe
-        } = _a, divProps = __rest(_a, ["isExpanded", "onChange", "isReadOnly", "isCode", "isBlock", "exitDelay", "maxWidth", "entryDelay", "onCopy", "hoverTip", "clickTip", "textAriaLabel", "toggleAriaLabel", "variant", "position", "className", "additionalActions", "ouiaId", "ouiaSafe"]);
-        const textIdPrefix = "text-input-";
-        const toggleIdPrefix = "toggle-";
-        const contentIdPrefix = "content-";
-        return React43.createElement(
-          "div",
-          Object.assign({ className: css(clipboard_copy_default.clipboardCopy, variant === "inline-compact" && clipboard_copy_default.modifiers.inline, isBlock && clipboard_copy_default.modifiers.block, this.state.expanded && clipboard_copy_default.modifiers.expanded, className) }, divProps, getOUIAProps(_ClipboardCopy.displayName, ouiaId, ouiaSafe)),
-          variant === "inline-compact" && React43.createElement(GenerateId, { prefix: "" }, (id) => React43.createElement(
-            React43.Fragment,
-            null,
-            !isCode && React43.createElement("span", { className: css(clipboard_copy_default.clipboardCopyText), id: `${textIdPrefix}${id}` }, this.state.text),
-            isCode && React43.createElement("code", { className: css(clipboard_copy_default.clipboardCopyText, clipboard_copy_default.modifiers.code), id: `${textIdPrefix}${id}` }, this.state.text),
-            React43.createElement(
-              "span",
-              { className: css(clipboard_copy_default.clipboardCopyActions) },
-              React43.createElement(
-                "span",
-                { className: css(clipboard_copy_default.clipboardCopyActionsItem) },
-                React43.createElement(ClipboardCopyButton, { variant: "plain", exitDelay, entryDelay, maxWidth, position, id: `copy-button-${id}`, textId: `text-input-${id}`, "aria-label": hoverTip, onClick: (event) => {
-                  onCopy(event, this.state.text);
-                  this.setState({ copied: true });
-                }, onTooltipHidden: () => this.setState({ copied: false }), hasNoPadding: true }, this.state.copied ? clickTip : hoverTip)
-              ),
-              additionalActions && additionalActions
-            )
-          )),
-          variant !== "inline-compact" && React43.createElement(GenerateId, { prefix: "" }, (id) => React43.createElement(
-            React43.Fragment,
-            null,
-            React43.createElement(
-              "div",
-              { className: css(clipboard_copy_default.clipboardCopyGroup) },
-              variant === "expansion" && React43.createElement(ClipboardCopyToggle, { isExpanded: this.state.expanded, onClick: (_event) => {
-                this.expandContent(_event);
-                if (this.state.expanded) {
-                  this.setState({ text: this.state.textWhenExpanded });
-                } else {
-                  this.setState({ textWhenExpanded: this.state.text });
-                }
-              }, id: `${toggleIdPrefix}${id}`, textId: `${textIdPrefix}${id}`, contentId: `${contentIdPrefix}${id}`, "aria-label": toggleAriaLabel }),
-              React43.createElement(TextInput, Object.assign({ readOnlyVariant: isReadOnly || this.state.expanded ? "default" : void 0, onChange: this.updateText, value: this.state.expanded ? this.state.textWhenExpanded : this.state.text, id: `text-input-${id}`, "aria-label": textAriaLabel }, isCode && { dir: "ltr" })),
-              React43.createElement(ClipboardCopyButton, { exitDelay, entryDelay, maxWidth, position, id: `copy-button-${id}`, textId: `text-input-${id}`, "aria-label": hoverTip, onClick: (event) => {
-                onCopy(event, this.state.expanded ? this.state.textWhenExpanded : this.state.text);
-                this.setState({ copied: true });
-              }, onTooltipHidden: () => this.setState({ copied: false }) }, this.state.copied ? clickTip : hoverTip)
-            ),
-            this.state.expanded && React43.createElement(ClipboardCopyExpanded, { isReadOnly, isCode, id: `content-${id}`, onChange: this.updateTextWhenExpanded }, this.state.text)
-          ))
-        );
-      };
-      const text = Array.isArray(this.props.children) ? this.props.children.join("") : this.props.children;
-      this.state = {
-        text,
-        expanded: this.props.isExpanded,
-        copied: false,
-        textWhenExpanded: text
-      };
-    }
-  };
-  ClipboardCopy.displayName = "ClipboardCopy";
-  ClipboardCopy.defaultProps = {
-    hoverTip: "Copy to clipboard",
-    clickTip: "Successfully copied to clipboard!",
-    isReadOnly: false,
-    isExpanded: false,
-    isCode: false,
-    variant: "inline",
-    position: TooltipPosition.top,
-    maxWidth: "150px",
-    exitDelay: 1500,
-    entryDelay: 300,
-    onCopy: clipboardCopyFunc,
-    onChange: () => void 0,
-    textAriaLabel: "Copyable input",
-    toggleAriaLabel: "Show content",
-    additionalActions: null,
-    ouiaSafe: true
-  };
-
   // node_modules/@patternfly/react-core/dist/esm/components/Switch/Switch.js
-  var React44 = __toESM(require_react());
+  var React39 = __toESM(require_react());
 
   // node_modules/@patternfly/react-styles/css/components/Switch/switch.mjs
   var switch_default = {
@@ -28651,7 +28193,7 @@
   };
 
   // node_modules/@patternfly/react-core/dist/esm/components/Switch/Switch.js
-  var Switch = class _Switch extends React44.Component {
+  var Switch = class _Switch extends React39.Component {
     constructor(props) {
       super(props);
       if (!props.label && !props["aria-label"] && !props["aria-labelledby"]) {
@@ -28683,26 +28225,26 @@
       const isAriaLabelledBy = hasAccessibleName && (!ariaLabel || ariaLabelledBy);
       const useDefaultAriaLabelledBy = !ariaLabelledBy && !ariaLabel;
       const ariaLabelledByIds = ariaLabelledBy !== null && ariaLabelledBy !== void 0 ? ariaLabelledBy : `${this.id}-label`;
-      return React44.createElement(
+      return React39.createElement(
         "label",
         Object.assign({ className: css(switch_default.switch, isReversed && switch_default.modifiers.reverse, className), htmlFor: this.id }, getOUIAProps(_Switch.displayName, ouiaId !== void 0 ? ouiaId : this.state.ouiaStateId, ouiaSafe)),
-        React44.createElement("input", Object.assign({ id: this.id, className: css(switch_default.switchInput), type: "checkbox", role: "switch", onChange: (event) => onChange(event, event.target.checked) }, defaultChecked !== void 0 ? { defaultChecked } : { checked: isChecked }, { disabled: isDisabled, "aria-labelledby": isAriaLabelledBy ? ariaLabelledByIds : null, "aria-label": ariaLabel }, props)),
-        label !== void 0 ? React44.createElement(
-          React44.Fragment,
+        React39.createElement("input", Object.assign({ id: this.id, className: css(switch_default.switchInput), type: "checkbox", role: "switch", onChange: (event) => onChange(event, event.target.checked) }, defaultChecked !== void 0 ? { defaultChecked } : { checked: isChecked }, { disabled: isDisabled, "aria-labelledby": isAriaLabelledBy ? ariaLabelledByIds : null, "aria-label": ariaLabel }, props)),
+        label !== void 0 ? React39.createElement(
+          React39.Fragment,
           null,
-          React44.createElement("span", { className: css(switch_default.switchToggle) }, hasCheckIcon && React44.createElement(
+          React39.createElement("span", { className: css(switch_default.switchToggle) }, hasCheckIcon && React39.createElement(
             "span",
             { className: css(switch_default.switchToggleIcon), "aria-hidden": "true" },
-            React44.createElement(check_icon_default, null)
+            React39.createElement(check_icon_default, null)
           )),
-          React44.createElement("span", { className: css(switch_default.switchLabel), id: isAriaLabelledBy && useDefaultAriaLabelledBy ? `${this.id}-label` : null, "aria-hidden": "true" }, label)
-        ) : React44.createElement(
+          React39.createElement("span", { className: css(switch_default.switchLabel), id: isAriaLabelledBy && useDefaultAriaLabelledBy ? `${this.id}-label` : null, "aria-hidden": "true" }, label)
+        ) : React39.createElement(
           "span",
           { className: css(switch_default.switchToggle) },
-          React44.createElement(
+          React39.createElement(
             "div",
             { className: css(switch_default.switchToggleIcon), "aria-hidden": "true" },
-            React44.createElement(check_icon_default, null)
+            React39.createElement(check_icon_default, null)
           )
         )
       );
@@ -32344,6 +31886,8 @@
     const [isGenerating, setIsGenerating] = (0, import_react6.useState)(false);
     const [currentRequest, setCurrentRequest] = (0, import_react6.useState)(null);
     const [codeBlockProcessing, setCodeBlockProcessing] = (0, import_react6.useState)(false);
+    const [expandedBlocks, setExpandedBlocks] = (0, import_react6.useState)({});
+    const [hoveredBlock, setHoveredBlock] = (0, import_react6.useState)(null);
     const responseRef = (0, import_react6.useRef)(null);
     (0, import_react6.useEffect)(() => {
       if (responseRef.current) {
@@ -32392,17 +31936,24 @@
           const lines = content.split("\n");
           const language = lines[0].trim();
           const code = lines.slice(1).join("\n");
-          return /* @__PURE__ */ import_react6.default.createElement("div", { key: index }, language && /* @__PURE__ */ import_react6.default.createElement("div", { style: { fontSize: "0.875rem", color: "var(--pf-v6-global--Color--200)", marginBottom: "0.25rem" } }, language), /* @__PURE__ */ import_react6.default.createElement(
-            ClipboardCopy,
+          const isExpanded = expandedBlocks[index] ?? true;
+          return /* @__PURE__ */ import_react6.default.createElement("div", { key: index }, /* @__PURE__ */ import_react6.default.createElement("div", { style: { border: "1px solid var(--pf-v6-global--BorderColor--100)", borderRadius: "3px" } }, /* @__PURE__ */ import_react6.default.createElement("div", { style: { display: "flex", alignItems: "center", padding: "0.5rem", backgroundColor: "var(--pf-v6-global--BackgroundColor--200)", borderBottom: "1px solid var(--pf-v6-global--BorderColor--100)" } }, /* @__PURE__ */ import_react6.default.createElement("span", { style: { marginRight: "auto" } }, language), /* @__PURE__ */ import_react6.default.createElement(
+            Button,
             {
-              isCode: true,
-              variant: "expansion",
-              isExpanded: true,
-              hoverTip: _("Copy"),
-              clickTip: _("Copied")
+              variant: "plain",
+              onMouseEnter: () => setHoveredBlock(index),
+              onMouseLeave: () => setHoveredBlock(null),
+              onClick: () => navigator.clipboard.writeText(code)
             },
-            code
-          ));
+            _("Copy")
+          )), /* @__PURE__ */ import_react6.default.createElement("div", { style: {
+            padding: "0.5rem",
+            backgroundColor: hoveredBlock === index ? "rgba(0, 123, 255, 0.3)" : "rgba(128, 128, 128, 0.2)",
+            fontFamily: "monospace",
+            whiteSpace: "pre-wrap",
+            overflow: "auto",
+            transition: "background-color 0.2s"
+          } }, code)));
         }
         return /* @__PURE__ */ import_react6.default.createElement("span", { key: index, style: { whiteSpace: "pre-wrap" } }, part);
       });
