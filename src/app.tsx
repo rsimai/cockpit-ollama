@@ -84,6 +84,12 @@ export const Application = () => {
         setModelSelectOpen(false);
     };
 
+    const handleKeyDown = (event: React.KeyboardEvent) => {
+        if (event.key === 'Enter' && event.ctrlKey) {
+            handleSend();
+        }
+    };
+
     const handleSend = () => {
         if (!selectedModel || !prompt.trim() || isGenerating) {
             return;
