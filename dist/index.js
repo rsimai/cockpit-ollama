@@ -1109,7 +1109,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useReducer(reducer, initialArg, init);
           }
-          function useRef5(initialValue) {
+          function useRef6(initialValue) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
@@ -1903,7 +1903,7 @@
           exports.useLayoutEffect = useLayoutEffect2;
           exports.useMemo = useMemo4;
           exports.useReducer = useReducer;
-          exports.useRef = useRef5;
+          exports.useRef = useRef6;
           exports.useState = useState7;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition;
@@ -31759,6 +31759,13 @@
     const [prompt, setPrompt] = (0, import_react6.useState)("");
     const [response, setResponse] = (0, import_react6.useState)("");
     const [isGenerating, setIsGenerating] = (0, import_react6.useState)(false);
+    const [currentRequest, setCurrentRequest] = (0, import_react6.useState)(null);
+    const responseRef = (0, import_react6.useRef)(null);
+    (0, import_react6.useEffect)(() => {
+      if (responseRef.current) {
+        responseRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+      }
+    }, [response]);
     (0, import_react6.useEffect)(() => {
       cockpit_default.script("hostname").then((content) => setHostname(content.trim())).catch((error) => console.error("Failed to fetch hostname:", error));
       const ollama = cockpit_default.http(11434);
@@ -31781,8 +31788,20 @@
       setModelSelectOpen(false);
     };
     const handleKeyDown = (event) => {
-      if (event.key === "Enter" && event.ctrlKey) {
-        handleSend();
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        if (isGenerating) {
+          handleStop();
+        } else {
+          handleSend();
+        }
+      }
+    };
+    const handleStop = () => {
+      if (currentRequest) {
+        currentRequest.close();
+        setCurrentRequest(null);
+        setIsGenerating(false);
       }
     };
     const handleSend = () => {
@@ -31804,6 +31823,7 @@
         body: JSON.stringify(payload),
         headers: { "Content-Type": "application/json" }
       });
+      setCurrentRequest(promise);
       promise.stream((chunk) => {
         try {
           const lines = chunk.split("\n").filter((line) => line.trim() !== "");
@@ -31833,6 +31853,7 @@
       });
       promise.finally(() => {
         setIsGenerating(false);
+        setCurrentRequest(null);
       });
     };
     const toggle = (toggleRef) => /* @__PURE__ */ import_react6.default.createElement(
@@ -31845,7 +31866,7 @@
       },
       selectedModel || _("Select a model")
     );
-    return /* @__PURE__ */ import_react6.default.createElement(import_react6.default.Fragment, null, /* @__PURE__ */ import_react6.default.createElement(Card, null, /* @__PURE__ */ import_react6.default.createElement(CardTitle, null, "Ollama"), /* @__PURE__ */ import_react6.default.createElement(CardBody, null, /* @__PURE__ */ import_react6.default.createElement(Alert, { variant: "info", isInline: true, title: cockpit_default.format(_("Running on host $0"), hostname) }))), /* @__PURE__ */ import_react6.default.createElement(Card, null, /* @__PURE__ */ import_react6.default.createElement(CardTitle, null, _("Available Models")), /* @__PURE__ */ import_react6.default.createElement(CardBody, null, loadingModels && /* @__PURE__ */ import_react6.default.createElement(Spinner, { "aria-label": _("Loading models") }), ollamaError && /* @__PURE__ */ import_react6.default.createElement(Alert, { variant: "danger", isInline: true, title: ollamaError }), !loadingModels && !ollamaError && /* @__PURE__ */ import_react6.default.createElement(Form, null, /* @__PURE__ */ import_react6.default.createElement(FormGroup, { label: _("Model"), fieldId: "model-select" }, models.length > 0 ? /* @__PURE__ */ import_react6.default.createElement(
+    return /* @__PURE__ */ import_react6.default.createElement("div", { style: { height: "100vh", display: "flex", flexDirection: "column", gap: "1rem", padding: "1rem" } }, /* @__PURE__ */ import_react6.default.createElement(Card, null, /* @__PURE__ */ import_react6.default.createElement(CardTitle, null, "Ollama"), /* @__PURE__ */ import_react6.default.createElement(CardBody, null, /* @__PURE__ */ import_react6.default.createElement(Alert, { variant: "info", isInline: true, title: cockpit_default.format(_("Running on host $0"), hostname) }))), /* @__PURE__ */ import_react6.default.createElement(Card, null, /* @__PURE__ */ import_react6.default.createElement(CardTitle, null, _("Available Models")), /* @__PURE__ */ import_react6.default.createElement(CardBody, null, loadingModels && /* @__PURE__ */ import_react6.default.createElement(Spinner, { "aria-label": _("Loading models") }), ollamaError && /* @__PURE__ */ import_react6.default.createElement(Alert, { variant: "danger", isInline: true, title: ollamaError }), !loadingModels && !ollamaError && /* @__PURE__ */ import_react6.default.createElement(Form, null, /* @__PURE__ */ import_react6.default.createElement(FormGroup, { label: _("Model"), fieldId: "model-select" }, models.length > 0 ? /* @__PURE__ */ import_react6.default.createElement(
       Select,
       {
         id: "model-select",
@@ -31870,12 +31891,12 @@
     )), /* @__PURE__ */ import_react6.default.createElement(GridItem, { span: 1, style: { display: "flex", alignItems: "flex-end" } }, /* @__PURE__ */ import_react6.default.createElement(
       Button,
       {
-        variant: "primary",
-        onClick: handleSend,
-        isDisabled: !selectedModel || !prompt.trim() || isGenerating
+        variant: isGenerating ? "secondary" : "primary",
+        onClick: isGenerating ? handleStop : handleSend,
+        isDisabled: !selectedModel || !isGenerating && !prompt.trim()
       },
-      isGenerating ? /* @__PURE__ */ import_react6.default.createElement(Spinner, { size: "sm", "aria-label": _("Sending") }) : _("Send")
-    ))))), /* @__PURE__ */ import_react6.default.createElement(Card, null, /* @__PURE__ */ import_react6.default.createElement(CardTitle, null, _("Response")), /* @__PURE__ */ import_react6.default.createElement(CardBody, null, isGenerating && !response && /* @__PURE__ */ import_react6.default.createElement(Spinner, { "aria-label": _("Generating response") }), generationError && /* @__PURE__ */ import_react6.default.createElement(Alert, { variant: "danger", isInline: true, title: generationError }), response && /* @__PURE__ */ import_react6.default.createElement("div", { style: { whiteSpace: "pre-wrap", fontFamily: "monospace" } }, response), !isGenerating && !response && !generationError && /* @__PURE__ */ import_react6.default.createElement("p", null, _("The response from Ollama will appear here.")))));
+      isGenerating ? _("Stop") : _("Send")
+    ))))), /* @__PURE__ */ import_react6.default.createElement(Card, { style: { flex: 1, display: "flex", flexDirection: "column" } }, /* @__PURE__ */ import_react6.default.createElement(CardTitle, null, _("Response")), /* @__PURE__ */ import_react6.default.createElement(CardBody, { style: { flex: 1, overflow: "auto" } }, isGenerating && !response && /* @__PURE__ */ import_react6.default.createElement(Spinner, { "aria-label": _("Generating response") }), generationError && /* @__PURE__ */ import_react6.default.createElement(Alert, { variant: "danger", isInline: true, title: generationError }), response && /* @__PURE__ */ import_react6.default.createElement("div", { ref: responseRef, style: { whiteSpace: "pre-wrap", fontFamily: "monospace" } }, response), !isGenerating && !response && !generationError && /* @__PURE__ */ import_react6.default.createElement("p", null, _("The response from Ollama will appear here.")))));
   };
 
   // src/index.tsx

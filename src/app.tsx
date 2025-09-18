@@ -17,7 +17,7 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Alert } from "@patternfly/react-core/dist/esm/components/Alert/index.js";
 import { Card, CardBody, CardTitle } from "@patternfly/react-core/dist/esm/components/Card/index.js";
 import { Form, FormGroup } from "@patternfly/react-core/dist/esm/components/Form/index.js";
@@ -52,6 +52,14 @@ export const Application = () => {
     const [prompt, setPrompt] = useState('');
     const [response, setResponse] = useState('');
     const [isGenerating, setIsGenerating] = useState(false);
+    const [currentRequest, setCurrentRequest] = useState<any>(null);
+    const responseRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (responseRef.current) {
+            responseRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        }
+    }, [response]);
 
     useEffect(() => {
         cockpit.script("hostname")
@@ -85,8 +93,21 @@ export const Application = () => {
     };
 
     const handleKeyDown = (event: React.KeyboardEvent) => {
-        if (event.key === 'Enter' && event.ctrlKey) {
-            handleSend();
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault();
+            if (isGenerating) {
+                handleStop();
+            } else {
+                handleSend();
+            }
+        }
+    };
+
+    const handleStop = () => {
+        if (currentRequest) {
+            currentRequest.close();
+            setCurrentRequest(null);
+            setIsGenerating(false);
         }
     };
 
@@ -112,6 +133,8 @@ export const Application = () => {
             body: JSON.stringify(payload),
             headers: { "Content-Type": "application/json" }
         });
+
+        setCurrentRequest(promise);
 
         promise.stream(chunk => {
             try {
@@ -145,6 +168,7 @@ export const Application = () => {
 
         promise.finally(() => {
             setIsGenerating(false);
+            setCurrentRequest(null);
         });
     };
 
@@ -160,7 +184,7 @@ export const Application = () => {
     );
 
     return (
-        <>
+        <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', gap: '1rem', padding: '1rem' }}>
             <Card>
                 <CardTitle>Ollama</CardTitle>
                 <CardBody>
@@ -211,25 +235,25 @@ export const Application = () => {
                         </GridItem>
                         <GridItem span={1} style={{ display: 'flex', alignItems: 'flex-end' }}>
                             <Button
-                                variant="primary"
-                                onClick={handleSend}
-                                isDisabled={!selectedModel || !prompt.trim() || isGenerating}
+                                variant={isGenerating ? "secondary" : "primary"}
+                                onClick={isGenerating ? handleStop : handleSend}
+                                isDisabled={!selectedModel || (!isGenerating && !prompt.trim())}
                             >
-                                {isGenerating ? <Spinner size="sm" aria-label={_("Sending")} /> : _("Send")}
+                                {isGenerating ? _("Stop") : _("Send")}
                             </Button>
                         </GridItem>
                     </Grid>
                 </CardBody>
             </Card>
-            <Card>
+            <Card style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                 <CardTitle>{_("Response")}</CardTitle>
-                <CardBody>
+                <CardBody style={{ flex: 1, overflow: 'auto' }}>
                     {isGenerating && !response && <Spinner aria-label={_("Generating response")} />}
                     {generationError && <Alert variant="danger" isInline title={generationError} />}
-                    {response && <div style={{ whiteSpace: 'pre-wrap', fontFamily: 'monospace' }}>{response}</div>}
+                    {response && <div ref={responseRef} style={{ whiteSpace: 'pre-wrap', fontFamily: 'monospace' }}>{response}</div>}
                     {!isGenerating && !response && !generationError && <p>{_("The response from Ollama will appear here.")}</p>}
                 </CardBody>
             </Card>
-        </>
+        </div>
     );
 };
