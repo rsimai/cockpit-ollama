@@ -255,20 +255,20 @@
           {
             Object.freeze(emptyObject);
           }
-          function Component11(props, context, updater) {
+          function Component12(props, context, updater) {
             this.props = props;
             this.context = context;
             this.refs = emptyObject;
             this.updater = updater || ReactNoopUpdateQueue;
           }
-          Component11.prototype.isReactComponent = {};
-          Component11.prototype.setState = function(partialState, callback) {
+          Component12.prototype.isReactComponent = {};
+          Component12.prototype.setState = function(partialState, callback) {
             if (typeof partialState !== "object" && typeof partialState !== "function" && partialState != null) {
               throw new Error("setState(...): takes an object of state variables to update or a function which returns an object of state variables.");
             }
             this.updater.enqueueSetState(this, partialState, callback, "setState");
           };
-          Component11.prototype.forceUpdate = function(callback) {
+          Component12.prototype.forceUpdate = function(callback) {
             this.updater.enqueueForceUpdate(this, callback, "forceUpdate");
           };
           {
@@ -277,7 +277,7 @@
               replaceState: ["replaceState", "Refactor your code to use setState instead (see https://github.com/facebook/react/issues/3236)."]
             };
             var defineDeprecationWarning = function(methodName, info) {
-              Object.defineProperty(Component11.prototype, methodName, {
+              Object.defineProperty(Component12.prototype, methodName, {
                 get: function() {
                   warn("%s(...) is deprecated in plain JavaScript React classes. %s", info[0], info[1]);
                   return void 0;
@@ -292,7 +292,7 @@
           }
           function ComponentDummy() {
           }
-          ComponentDummy.prototype = Component11.prototype;
+          ComponentDummy.prototype = Component12.prototype;
           function PureComponent(props, context, updater) {
             this.props = props;
             this.context = context;
@@ -301,7 +301,7 @@
           }
           var pureComponentPrototype = PureComponent.prototype = new ComponentDummy();
           pureComponentPrototype.constructor = PureComponent;
-          assign(pureComponentPrototype, Component11.prototype);
+          assign(pureComponentPrototype, Component12.prototype);
           pureComponentPrototype.isPureReactComponent = true;
           function createRef7() {
             var refObject = {
@@ -527,7 +527,7 @@
             }
             return element;
           };
-          function createElement35(type, config, children) {
+          function createElement36(type, config, children) {
             var propName;
             var props = {};
             var key = null;
@@ -1366,8 +1366,8 @@
               return describeNativeComponentFrame(fn, false);
             }
           }
-          function shouldConstruct(Component12) {
-            var prototype = Component12.prototype;
+          function shouldConstruct(Component13) {
+            var prototype = Component13.prototype;
             return !!(prototype && prototype.isReactComponent);
           }
           function describeUnknownElementTypeFrameInDEV(type, source, ownerFn) {
@@ -1626,7 +1626,7 @@
                 error("React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, info);
               }
             }
-            var element = createElement35.apply(this, arguments);
+            var element = createElement36.apply(this, arguments);
             if (element == null) {
               return element;
             }
@@ -1873,7 +1873,7 @@
             only: onlyChild
           };
           exports.Children = Children;
-          exports.Component = Component11;
+          exports.Component = Component12;
           exports.Fragment = REACT_FRAGMENT_TYPE;
           exports.Profiler = REACT_PROFILER_TYPE;
           exports.PureComponent = PureComponent;
@@ -2400,9 +2400,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React46 = require_react();
+          var React47 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React46.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React47.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -2451,7 +2451,7 @@
           var HostPortal = 4;
           var HostComponent = 5;
           var HostText = 6;
-          var Fragment9 = 7;
+          var Fragment10 = 7;
           var Mode = 8;
           var ContextConsumer = 9;
           var ContextProvider = 10;
@@ -3438,8 +3438,8 @@
               return describeNativeComponentFrame(fn, false);
             }
           }
-          function shouldConstruct(Component11) {
-            var prototype = Component11.prototype;
+          function shouldConstruct(Component12) {
+            var prototype = Component12.prototype;
             return !!(prototype && prototype.isReactComponent);
           }
           function describeUnknownElementTypeFrameInDEV(type, source, ownerFn) {
@@ -3608,7 +3608,7 @@
                 return "DehydratedFragment";
               case ForwardRef:
                 return getWrappedName$1(type, type.render, "ForwardRef");
-              case Fragment9:
+              case Fragment10:
                 return "Fragment";
               case HostComponent:
                 return type;
@@ -4009,7 +4009,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React46.Children.forEach(props.children, function(child) {
+                  React47.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -9433,7 +9433,7 @@
               }
             }
           }
-          function createElement35(type, props, rootContainerElement, parentNamespace) {
+          function createElement36(type, props, rootContainerElement, parentNamespace) {
             var isCustomComponentTag;
             var ownerDocument = getOwnerDocumentFromRootContainer(rootContainerElement);
             var domElement;
@@ -10303,7 +10303,7 @@
               }
               parentNamespace = hostContextDev.namespace;
             }
-            var domElement = createElement35(type, props, rootContainerInstance, parentNamespace);
+            var domElement = createElement36(type, props, rootContainerInstance, parentNamespace);
             precacheFiberNode(internalInstanceHandle, domElement);
             updateFiberProps(domElement, props);
             return domElement;
@@ -10902,9 +10902,9 @@
           var contextStackCursor = createCursor(emptyContextObject);
           var didPerformWorkStackCursor = createCursor(false);
           var previousContext = emptyContextObject;
-          function getUnmaskedContext(workInProgress2, Component11, didPushOwnContextIfProvider) {
+          function getUnmaskedContext(workInProgress2, Component12, didPushOwnContextIfProvider) {
             {
-              if (didPushOwnContextIfProvider && isContextProvider(Component11)) {
+              if (didPushOwnContextIfProvider && isContextProvider(Component12)) {
                 return previousContext;
               }
               return contextStackCursor.current;
@@ -11041,8 +11041,8 @@
                   case HostRoot:
                     return node.stateNode.context;
                   case ClassComponent: {
-                    var Component11 = node.type;
-                    if (isContextProvider(Component11)) {
+                    var Component12 = node.type;
+                    if (isContextProvider(Component12)) {
                       return node.stateNode.__reactInternalMemoizedMergedChildContext;
                     }
                     break;
@@ -12037,7 +12037,7 @@
               }
             }
             function updateFragment2(returnFiber, current2, fragment, lanes, key) {
-              if (current2 === null || current2.tag !== Fragment9) {
+              if (current2 === null || current2.tag !== Fragment10) {
                 var created = createFiberFromFragment(fragment, returnFiber.mode, lanes, key);
                 created.return = returnFiber;
                 return created;
@@ -12440,7 +12440,7 @@
                 if (child.key === key) {
                   var elementType = element.type;
                   if (elementType === REACT_FRAGMENT_TYPE) {
-                    if (child.tag === Fragment9) {
+                    if (child.tag === Fragment10) {
                       deleteRemainingChildren(returnFiber, child.sibling);
                       var existing = useFiber(child, element.props.children);
                       existing.return = returnFiber;
@@ -13496,7 +13496,7 @@
             }
             return true;
           }
-          function renderWithHooks(current2, workInProgress2, Component11, props, secondArg, nextRenderLanes) {
+          function renderWithHooks(current2, workInProgress2, Component12, props, secondArg, nextRenderLanes) {
             renderLanes = nextRenderLanes;
             currentlyRenderingFiber$1 = workInProgress2;
             {
@@ -13516,7 +13516,7 @@
                 ReactCurrentDispatcher$1.current = HooksDispatcherOnMountInDEV;
               }
             }
-            var children = Component11(props, secondArg);
+            var children = Component12(props, secondArg);
             if (didScheduleRenderPhaseUpdateDuringThisPass) {
               var numberOfReRenders = 0;
               do {
@@ -13536,7 +13536,7 @@
                   hookTypesUpdateIndexDev = -1;
                 }
                 ReactCurrentDispatcher$1.current = HooksDispatcherOnRerenderInDEV;
-                children = Component11(props, secondArg);
+                children = Component12(props, secondArg);
               } while (didScheduleRenderPhaseUpdateDuringThisPass);
             }
             ReactCurrentDispatcher$1.current = ContextOnlyDispatcher;
@@ -15335,10 +15335,10 @@
               child = child.sibling;
             }
           }
-          function resolveDefaultProps(Component11, baseProps) {
-            if (Component11 && Component11.defaultProps) {
+          function resolveDefaultProps(Component12, baseProps) {
+            if (Component12 && Component12.defaultProps) {
               var props = assign({}, baseProps);
-              var defaultProps = Component11.defaultProps;
+              var defaultProps = Component12.defaultProps;
               for (var propName in defaultProps) {
                 if (props[propName] === void 0) {
                   props[propName] = defaultProps[propName];
@@ -16267,22 +16267,22 @@
             workInProgress2.child = reconcileChildFibers(workInProgress2, current2.child, null, renderLanes2);
             workInProgress2.child = reconcileChildFibers(workInProgress2, null, nextChildren, renderLanes2);
           }
-          function updateForwardRef(current2, workInProgress2, Component11, nextProps, renderLanes2) {
+          function updateForwardRef(current2, workInProgress2, Component12, nextProps, renderLanes2) {
             {
               if (workInProgress2.type !== workInProgress2.elementType) {
-                var innerPropTypes = Component11.propTypes;
+                var innerPropTypes = Component12.propTypes;
                 if (innerPropTypes) {
                   checkPropTypes(
                     innerPropTypes,
                     nextProps,
                     // Resolved props
                     "prop",
-                    getComponentNameFromType(Component11)
+                    getComponentNameFromType(Component12)
                   );
                 }
               }
             }
-            var render2 = Component11.render;
+            var render2 = Component12.render;
             var ref = workInProgress2.ref;
             var nextChildren;
             var hasId;
@@ -16320,11 +16320,11 @@
             reconcileChildren(current2, workInProgress2, nextChildren, renderLanes2);
             return workInProgress2.child;
           }
-          function updateMemoComponent(current2, workInProgress2, Component11, nextProps, renderLanes2) {
+          function updateMemoComponent(current2, workInProgress2, Component12, nextProps, renderLanes2) {
             if (current2 === null) {
-              var type = Component11.type;
-              if (isSimpleFunctionComponent(type) && Component11.compare === null && // SimpleMemoComponent codepath doesn't resolve outer props either.
-              Component11.defaultProps === void 0) {
+              var type = Component12.type;
+              if (isSimpleFunctionComponent(type) && Component12.compare === null && // SimpleMemoComponent codepath doesn't resolve outer props either.
+              Component12.defaultProps === void 0) {
                 var resolvedType = type;
                 {
                   resolvedType = resolveFunctionForHotReloading(type);
@@ -16347,7 +16347,7 @@
                     getComponentNameFromType(type)
                   );
                 }
-                if (Component11.defaultProps !== void 0) {
+                if (Component12.defaultProps !== void 0) {
                   var componentName = getComponentNameFromType(type) || "Unknown";
                   if (!didWarnAboutDefaultPropsOnFunctionComponent[componentName]) {
                     error("%s: Support for defaultProps will be removed from memo components in a future major release. Use JavaScript default parameters instead.", componentName);
@@ -16355,14 +16355,14 @@
                   }
                 }
               }
-              var child = createFiberFromTypeAndProps(Component11.type, null, nextProps, workInProgress2, workInProgress2.mode, renderLanes2);
+              var child = createFiberFromTypeAndProps(Component12.type, null, nextProps, workInProgress2, workInProgress2.mode, renderLanes2);
               child.ref = workInProgress2.ref;
               child.return = workInProgress2;
               workInProgress2.child = child;
               return child;
             }
             {
-              var _type = Component11.type;
+              var _type = Component12.type;
               var _innerPropTypes = _type.propTypes;
               if (_innerPropTypes) {
                 checkPropTypes(
@@ -16378,7 +16378,7 @@
             var hasScheduledUpdateOrContext = checkScheduledUpdateOrContext(current2, renderLanes2);
             if (!hasScheduledUpdateOrContext) {
               var prevProps = currentChild.memoizedProps;
-              var compare = Component11.compare;
+              var compare = Component12.compare;
               compare = compare !== null ? compare : shallowEqual;
               if (compare(prevProps, nextProps) && current2.ref === workInProgress2.ref) {
                 return bailoutOnAlreadyFinishedWork(current2, workInProgress2, renderLanes2);
@@ -16391,7 +16391,7 @@
             workInProgress2.child = newChild;
             return newChild;
           }
-          function updateSimpleMemoComponent(current2, workInProgress2, Component11, nextProps, renderLanes2) {
+          function updateSimpleMemoComponent(current2, workInProgress2, Component12, nextProps, renderLanes2) {
             {
               if (workInProgress2.type !== workInProgress2.elementType) {
                 var outerMemoType = workInProgress2.elementType;
@@ -16431,7 +16431,7 @@
                 }
               }
             }
-            return updateFunctionComponent(current2, workInProgress2, Component11, nextProps, renderLanes2);
+            return updateFunctionComponent(current2, workInProgress2, Component12, nextProps, renderLanes2);
           }
           function updateOffscreenComponent(current2, workInProgress2, renderLanes2) {
             var nextProps = workInProgress2.pendingProps;
@@ -16521,24 +16521,24 @@
               }
             }
           }
-          function updateFunctionComponent(current2, workInProgress2, Component11, nextProps, renderLanes2) {
+          function updateFunctionComponent(current2, workInProgress2, Component12, nextProps, renderLanes2) {
             {
               if (workInProgress2.type !== workInProgress2.elementType) {
-                var innerPropTypes = Component11.propTypes;
+                var innerPropTypes = Component12.propTypes;
                 if (innerPropTypes) {
                   checkPropTypes(
                     innerPropTypes,
                     nextProps,
                     // Resolved props
                     "prop",
-                    getComponentNameFromType(Component11)
+                    getComponentNameFromType(Component12)
                   );
                 }
               }
             }
             var context;
             {
-              var unmaskedContext = getUnmaskedContext(workInProgress2, Component11, true);
+              var unmaskedContext = getUnmaskedContext(workInProgress2, Component12, true);
               context = getMaskedContext(workInProgress2, unmaskedContext);
             }
             var nextChildren;
@@ -16550,12 +16550,12 @@
             {
               ReactCurrentOwner$1.current = workInProgress2;
               setIsRendering(true);
-              nextChildren = renderWithHooks(current2, workInProgress2, Component11, nextProps, context, renderLanes2);
+              nextChildren = renderWithHooks(current2, workInProgress2, Component12, nextProps, context, renderLanes2);
               hasId = checkDidRenderIdHook();
               if (workInProgress2.mode & StrictLegacyMode) {
                 setIsStrictModeForDevtools(true);
                 try {
-                  nextChildren = renderWithHooks(current2, workInProgress2, Component11, nextProps, context, renderLanes2);
+                  nextChildren = renderWithHooks(current2, workInProgress2, Component12, nextProps, context, renderLanes2);
                   hasId = checkDidRenderIdHook();
                 } finally {
                   setIsStrictModeForDevtools(false);
@@ -16577,7 +16577,7 @@
             reconcileChildren(current2, workInProgress2, nextChildren, renderLanes2);
             return workInProgress2.child;
           }
-          function updateClassComponent(current2, workInProgress2, Component11, nextProps, renderLanes2) {
+          function updateClassComponent(current2, workInProgress2, Component12, nextProps, renderLanes2) {
             {
               switch (shouldError(workInProgress2)) {
                 case false: {
@@ -16600,20 +16600,20 @@
                 }
               }
               if (workInProgress2.type !== workInProgress2.elementType) {
-                var innerPropTypes = Component11.propTypes;
+                var innerPropTypes = Component12.propTypes;
                 if (innerPropTypes) {
                   checkPropTypes(
                     innerPropTypes,
                     nextProps,
                     // Resolved props
                     "prop",
-                    getComponentNameFromType(Component11)
+                    getComponentNameFromType(Component12)
                   );
                 }
               }
             }
             var hasContext;
-            if (isContextProvider(Component11)) {
+            if (isContextProvider(Component12)) {
               hasContext = true;
               pushContextProvider(workInProgress2);
             } else {
@@ -16624,15 +16624,15 @@
             var shouldUpdate;
             if (instance === null) {
               resetSuspendedCurrentOnMountInLegacyMode(current2, workInProgress2);
-              constructClassInstance(workInProgress2, Component11, nextProps);
-              mountClassInstance(workInProgress2, Component11, nextProps, renderLanes2);
+              constructClassInstance(workInProgress2, Component12, nextProps);
+              mountClassInstance(workInProgress2, Component12, nextProps, renderLanes2);
               shouldUpdate = true;
             } else if (current2 === null) {
-              shouldUpdate = resumeMountClassInstance(workInProgress2, Component11, nextProps, renderLanes2);
+              shouldUpdate = resumeMountClassInstance(workInProgress2, Component12, nextProps, renderLanes2);
             } else {
-              shouldUpdate = updateClassInstance(current2, workInProgress2, Component11, nextProps, renderLanes2);
+              shouldUpdate = updateClassInstance(current2, workInProgress2, Component12, nextProps, renderLanes2);
             }
-            var nextUnitOfWork = finishClassComponent(current2, workInProgress2, Component11, shouldUpdate, hasContext, renderLanes2);
+            var nextUnitOfWork = finishClassComponent(current2, workInProgress2, Component12, shouldUpdate, hasContext, renderLanes2);
             {
               var inst = workInProgress2.stateNode;
               if (shouldUpdate && inst.props !== nextProps) {
@@ -16644,19 +16644,19 @@
             }
             return nextUnitOfWork;
           }
-          function finishClassComponent(current2, workInProgress2, Component11, shouldUpdate, hasContext, renderLanes2) {
+          function finishClassComponent(current2, workInProgress2, Component12, shouldUpdate, hasContext, renderLanes2) {
             markRef(current2, workInProgress2);
             var didCaptureError = (workInProgress2.flags & DidCapture) !== NoFlags;
             if (!shouldUpdate && !didCaptureError) {
               if (hasContext) {
-                invalidateContextProvider(workInProgress2, Component11, false);
+                invalidateContextProvider(workInProgress2, Component12, false);
               }
               return bailoutOnAlreadyFinishedWork(current2, workInProgress2, renderLanes2);
             }
             var instance = workInProgress2.stateNode;
             ReactCurrentOwner$1.current = workInProgress2;
             var nextChildren;
-            if (didCaptureError && typeof Component11.getDerivedStateFromError !== "function") {
+            if (didCaptureError && typeof Component12.getDerivedStateFromError !== "function") {
               nextChildren = null;
               {
                 stopProfilerTimerIfRunning();
@@ -16690,7 +16690,7 @@
             }
             workInProgress2.memoizedState = instance.state;
             if (hasContext) {
-              invalidateContextProvider(workInProgress2, Component11, true);
+              invalidateContextProvider(workInProgress2, Component12, true);
             }
             return workInProgress2.child;
           }
@@ -16790,45 +16790,45 @@
             var lazyComponent = elementType;
             var payload = lazyComponent._payload;
             var init = lazyComponent._init;
-            var Component11 = init(payload);
-            workInProgress2.type = Component11;
-            var resolvedTag = workInProgress2.tag = resolveLazyComponentTag(Component11);
-            var resolvedProps = resolveDefaultProps(Component11, props);
+            var Component12 = init(payload);
+            workInProgress2.type = Component12;
+            var resolvedTag = workInProgress2.tag = resolveLazyComponentTag(Component12);
+            var resolvedProps = resolveDefaultProps(Component12, props);
             var child;
             switch (resolvedTag) {
               case FunctionComponent: {
                 {
-                  validateFunctionComponentInDev(workInProgress2, Component11);
-                  workInProgress2.type = Component11 = resolveFunctionForHotReloading(Component11);
+                  validateFunctionComponentInDev(workInProgress2, Component12);
+                  workInProgress2.type = Component12 = resolveFunctionForHotReloading(Component12);
                 }
-                child = updateFunctionComponent(null, workInProgress2, Component11, resolvedProps, renderLanes2);
+                child = updateFunctionComponent(null, workInProgress2, Component12, resolvedProps, renderLanes2);
                 return child;
               }
               case ClassComponent: {
                 {
-                  workInProgress2.type = Component11 = resolveClassForHotReloading(Component11);
+                  workInProgress2.type = Component12 = resolveClassForHotReloading(Component12);
                 }
-                child = updateClassComponent(null, workInProgress2, Component11, resolvedProps, renderLanes2);
+                child = updateClassComponent(null, workInProgress2, Component12, resolvedProps, renderLanes2);
                 return child;
               }
               case ForwardRef: {
                 {
-                  workInProgress2.type = Component11 = resolveForwardRefForHotReloading(Component11);
+                  workInProgress2.type = Component12 = resolveForwardRefForHotReloading(Component12);
                 }
-                child = updateForwardRef(null, workInProgress2, Component11, resolvedProps, renderLanes2);
+                child = updateForwardRef(null, workInProgress2, Component12, resolvedProps, renderLanes2);
                 return child;
               }
               case MemoComponent: {
                 {
                   if (workInProgress2.type !== workInProgress2.elementType) {
-                    var outerPropTypes = Component11.propTypes;
+                    var outerPropTypes = Component12.propTypes;
                     if (outerPropTypes) {
                       checkPropTypes(
                         outerPropTypes,
                         resolvedProps,
                         // Resolved for outer only
                         "prop",
-                        getComponentNameFromType(Component11)
+                        getComponentNameFromType(Component12)
                       );
                     }
                   }
@@ -16836,8 +16836,8 @@
                 child = updateMemoComponent(
                   null,
                   workInProgress2,
-                  Component11,
-                  resolveDefaultProps(Component11.type, resolvedProps),
+                  Component12,
+                  resolveDefaultProps(Component12.type, resolvedProps),
                   // The inner type can have defaults too
                   renderLanes2
                 );
@@ -16846,33 +16846,33 @@
             }
             var hint = "";
             {
-              if (Component11 !== null && typeof Component11 === "object" && Component11.$$typeof === REACT_LAZY_TYPE) {
+              if (Component12 !== null && typeof Component12 === "object" && Component12.$$typeof === REACT_LAZY_TYPE) {
                 hint = " Did you wrap a component in React.lazy() more than once?";
               }
             }
-            throw new Error("Element type is invalid. Received a promise that resolves to: " + Component11 + ". " + ("Lazy element type must resolve to a class or function." + hint));
+            throw new Error("Element type is invalid. Received a promise that resolves to: " + Component12 + ". " + ("Lazy element type must resolve to a class or function." + hint));
           }
-          function mountIncompleteClassComponent(_current, workInProgress2, Component11, nextProps, renderLanes2) {
+          function mountIncompleteClassComponent(_current, workInProgress2, Component12, nextProps, renderLanes2) {
             resetSuspendedCurrentOnMountInLegacyMode(_current, workInProgress2);
             workInProgress2.tag = ClassComponent;
             var hasContext;
-            if (isContextProvider(Component11)) {
+            if (isContextProvider(Component12)) {
               hasContext = true;
               pushContextProvider(workInProgress2);
             } else {
               hasContext = false;
             }
             prepareToReadContext(workInProgress2, renderLanes2);
-            constructClassInstance(workInProgress2, Component11, nextProps);
-            mountClassInstance(workInProgress2, Component11, nextProps, renderLanes2);
-            return finishClassComponent(null, workInProgress2, Component11, true, hasContext, renderLanes2);
+            constructClassInstance(workInProgress2, Component12, nextProps);
+            mountClassInstance(workInProgress2, Component12, nextProps, renderLanes2);
+            return finishClassComponent(null, workInProgress2, Component12, true, hasContext, renderLanes2);
           }
-          function mountIndeterminateComponent(_current, workInProgress2, Component11, renderLanes2) {
+          function mountIndeterminateComponent(_current, workInProgress2, Component12, renderLanes2) {
             resetSuspendedCurrentOnMountInLegacyMode(_current, workInProgress2);
             var props = workInProgress2.pendingProps;
             var context;
             {
-              var unmaskedContext = getUnmaskedContext(workInProgress2, Component11, false);
+              var unmaskedContext = getUnmaskedContext(workInProgress2, Component12, false);
               context = getMaskedContext(workInProgress2, unmaskedContext);
             }
             prepareToReadContext(workInProgress2, renderLanes2);
@@ -16882,8 +16882,8 @@
               markComponentRenderStarted(workInProgress2);
             }
             {
-              if (Component11.prototype && typeof Component11.prototype.render === "function") {
-                var componentName = getComponentNameFromType(Component11) || "Unknown";
+              if (Component12.prototype && typeof Component12.prototype.render === "function") {
+                var componentName = getComponentNameFromType(Component12) || "Unknown";
                 if (!didWarnAboutBadClass[componentName]) {
                   error("The <%s /> component appears to have a render method, but doesn't extend React.Component. This is likely to cause errors. Change %s to extend React.Component instead.", componentName, componentName);
                   didWarnAboutBadClass[componentName] = true;
@@ -16894,7 +16894,7 @@
               }
               setIsRendering(true);
               ReactCurrentOwner$1.current = workInProgress2;
-              value = renderWithHooks(null, workInProgress2, Component11, props, context, renderLanes2);
+              value = renderWithHooks(null, workInProgress2, Component12, props, context, renderLanes2);
               hasId = checkDidRenderIdHook();
               setIsRendering(false);
             }
@@ -16904,7 +16904,7 @@
             workInProgress2.flags |= PerformedWork;
             {
               if (typeof value === "object" && value !== null && typeof value.render === "function" && value.$$typeof === void 0) {
-                var _componentName = getComponentNameFromType(Component11) || "Unknown";
+                var _componentName = getComponentNameFromType(Component12) || "Unknown";
                 if (!didWarnAboutModulePatternComponent[_componentName]) {
                   error("The <%s /> component appears to be a function component that returns a class instance. Change %s to a class that extends React.Component instead. If you can't use a class try assigning the prototype on the function as a workaround. `%s.prototype = React.Component.prototype`. Don't use an arrow function since it cannot be called with `new` by React.", _componentName, _componentName, _componentName);
                   didWarnAboutModulePatternComponent[_componentName] = true;
@@ -16917,7 +16917,7 @@
               typeof value === "object" && value !== null && typeof value.render === "function" && value.$$typeof === void 0
             ) {
               {
-                var _componentName2 = getComponentNameFromType(Component11) || "Unknown";
+                var _componentName2 = getComponentNameFromType(Component12) || "Unknown";
                 if (!didWarnAboutModulePatternComponent[_componentName2]) {
                   error("The <%s /> component appears to be a function component that returns a class instance. Change %s to a class that extends React.Component instead. If you can't use a class try assigning the prototype on the function as a workaround. `%s.prototype = React.Component.prototype`. Don't use an arrow function since it cannot be called with `new` by React.", _componentName2, _componentName2, _componentName2);
                   didWarnAboutModulePatternComponent[_componentName2] = true;
@@ -16927,7 +16927,7 @@
               workInProgress2.memoizedState = null;
               workInProgress2.updateQueue = null;
               var hasContext = false;
-              if (isContextProvider(Component11)) {
+              if (isContextProvider(Component12)) {
                 hasContext = true;
                 pushContextProvider(workInProgress2);
               } else {
@@ -16936,15 +16936,15 @@
               workInProgress2.memoizedState = value.state !== null && value.state !== void 0 ? value.state : null;
               initializeUpdateQueue(workInProgress2);
               adoptClassInstance(workInProgress2, value);
-              mountClassInstance(workInProgress2, Component11, props, renderLanes2);
-              return finishClassComponent(null, workInProgress2, Component11, true, hasContext, renderLanes2);
+              mountClassInstance(workInProgress2, Component12, props, renderLanes2);
+              return finishClassComponent(null, workInProgress2, Component12, true, hasContext, renderLanes2);
             } else {
               workInProgress2.tag = FunctionComponent;
               {
                 if (workInProgress2.mode & StrictLegacyMode) {
                   setIsStrictModeForDevtools(true);
                   try {
-                    value = renderWithHooks(null, workInProgress2, Component11, props, context, renderLanes2);
+                    value = renderWithHooks(null, workInProgress2, Component12, props, context, renderLanes2);
                     hasId = checkDidRenderIdHook();
                   } finally {
                     setIsStrictModeForDevtools(false);
@@ -16956,16 +16956,16 @@
               }
               reconcileChildren(null, workInProgress2, value, renderLanes2);
               {
-                validateFunctionComponentInDev(workInProgress2, Component11);
+                validateFunctionComponentInDev(workInProgress2, Component12);
               }
               return workInProgress2.child;
             }
           }
-          function validateFunctionComponentInDev(workInProgress2, Component11) {
+          function validateFunctionComponentInDev(workInProgress2, Component12) {
             {
-              if (Component11) {
-                if (Component11.childContextTypes) {
-                  error("%s(...): childContextTypes cannot be defined on a function component.", Component11.displayName || Component11.name || "Component");
+              if (Component12) {
+                if (Component12.childContextTypes) {
+                  error("%s(...): childContextTypes cannot be defined on a function component.", Component12.displayName || Component12.name || "Component");
                 }
               }
               if (workInProgress2.ref !== null) {
@@ -16984,22 +16984,22 @@
                   error("Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?%s", info);
                 }
               }
-              if (Component11.defaultProps !== void 0) {
-                var componentName = getComponentNameFromType(Component11) || "Unknown";
+              if (Component12.defaultProps !== void 0) {
+                var componentName = getComponentNameFromType(Component12) || "Unknown";
                 if (!didWarnAboutDefaultPropsOnFunctionComponent[componentName]) {
                   error("%s: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.", componentName);
                   didWarnAboutDefaultPropsOnFunctionComponent[componentName] = true;
                 }
               }
-              if (typeof Component11.getDerivedStateFromProps === "function") {
-                var _componentName3 = getComponentNameFromType(Component11) || "Unknown";
+              if (typeof Component12.getDerivedStateFromProps === "function") {
+                var _componentName3 = getComponentNameFromType(Component12) || "Unknown";
                 if (!didWarnAboutGetDerivedStateOnFunctionComponent[_componentName3]) {
                   error("%s: Function components do not support getDerivedStateFromProps.", _componentName3);
                   didWarnAboutGetDerivedStateOnFunctionComponent[_componentName3] = true;
                 }
               }
-              if (typeof Component11.contextType === "object" && Component11.contextType !== null) {
-                var _componentName4 = getComponentNameFromType(Component11) || "Unknown";
+              if (typeof Component12.contextType === "object" && Component12.contextType !== null) {
+                var _componentName4 = getComponentNameFromType(Component12) || "Unknown";
                 if (!didWarnAboutContextTypeOnFunctionComponent[_componentName4]) {
                   error("%s: Function components do not support contextType.", _componentName4);
                   didWarnAboutContextTypeOnFunctionComponent[_componentName4] = true;
@@ -17761,8 +17761,8 @@
                 pushHostContext(workInProgress2);
                 break;
               case ClassComponent: {
-                var Component11 = workInProgress2.type;
-                if (isContextProvider(Component11)) {
+                var Component12 = workInProgress2.type;
+                if (isContextProvider(Component12)) {
                   pushContextProvider(workInProgress2);
                 }
                 break;
@@ -17889,10 +17889,10 @@
                 return mountLazyComponent(current2, workInProgress2, elementType, renderLanes2);
               }
               case FunctionComponent: {
-                var Component11 = workInProgress2.type;
+                var Component12 = workInProgress2.type;
                 var unresolvedProps = workInProgress2.pendingProps;
-                var resolvedProps = workInProgress2.elementType === Component11 ? unresolvedProps : resolveDefaultProps(Component11, unresolvedProps);
-                return updateFunctionComponent(current2, workInProgress2, Component11, resolvedProps, renderLanes2);
+                var resolvedProps = workInProgress2.elementType === Component12 ? unresolvedProps : resolveDefaultProps(Component12, unresolvedProps);
+                return updateFunctionComponent(current2, workInProgress2, Component12, resolvedProps, renderLanes2);
               }
               case ClassComponent: {
                 var _Component = workInProgress2.type;
@@ -17916,7 +17916,7 @@
                 var _resolvedProps2 = workInProgress2.elementType === type ? _unresolvedProps2 : resolveDefaultProps(type, _unresolvedProps2);
                 return updateForwardRef(current2, workInProgress2, type, _resolvedProps2, renderLanes2);
               }
-              case Fragment9:
+              case Fragment10:
                 return updateFragment(current2, workInProgress2, renderLanes2);
               case Mode:
                 return updateMode(current2, workInProgress2, renderLanes2);
@@ -18188,7 +18188,7 @@
               case SimpleMemoComponent:
               case FunctionComponent:
               case ForwardRef:
-              case Fragment9:
+              case Fragment10:
               case Mode:
               case Profiler:
               case ContextConsumer:
@@ -18196,8 +18196,8 @@
                 bubbleProperties(workInProgress2);
                 return null;
               case ClassComponent: {
-                var Component11 = workInProgress2.type;
-                if (isContextProvider(Component11)) {
+                var Component12 = workInProgress2.type;
+                if (isContextProvider(Component12)) {
                   popContext(workInProgress2);
                 }
                 bubbleProperties(workInProgress2);
@@ -18515,8 +18515,8 @@
             popTreeContext(workInProgress2);
             switch (workInProgress2.tag) {
               case ClassComponent: {
-                var Component11 = workInProgress2.type;
-                if (isContextProvider(Component11)) {
+                var Component12 = workInProgress2.type;
+                if (isContextProvider(Component12)) {
                   popContext(workInProgress2);
                 }
                 var flags = workInProgress2.flags;
@@ -22201,18 +22201,18 @@
           var createFiber = function(tag, pendingProps, key, mode) {
             return new FiberNode(tag, pendingProps, key, mode);
           };
-          function shouldConstruct$1(Component11) {
-            var prototype = Component11.prototype;
+          function shouldConstruct$1(Component12) {
+            var prototype = Component12.prototype;
             return !!(prototype && prototype.isReactComponent);
           }
           function isSimpleFunctionComponent(type) {
             return typeof type === "function" && !shouldConstruct$1(type) && type.defaultProps === void 0;
           }
-          function resolveLazyComponentTag(Component11) {
-            if (typeof Component11 === "function") {
-              return shouldConstruct$1(Component11) ? ClassComponent : FunctionComponent;
-            } else if (Component11 !== void 0 && Component11 !== null) {
-              var $$typeof = Component11.$$typeof;
+          function resolveLazyComponentTag(Component12) {
+            if (typeof Component12 === "function") {
+              return shouldConstruct$1(Component12) ? ClassComponent : FunctionComponent;
+            } else if (Component12 !== void 0 && Component12 !== null) {
+              var $$typeof = Component12.$$typeof;
               if ($$typeof === REACT_FORWARD_REF_TYPE) {
                 return ForwardRef;
               }
@@ -22449,7 +22449,7 @@
             return fiber;
           }
           function createFiberFromFragment(elements, mode, lanes, key) {
-            var fiber = createFiber(Fragment9, elements, key, mode);
+            var fiber = createFiber(Fragment10, elements, key, mode);
             fiber.lanes = lanes;
             return fiber;
           }
@@ -22653,9 +22653,9 @@
             var fiber = get(parentComponent);
             var parentContext = findCurrentUnmaskedContext(fiber);
             if (fiber.tag === ClassComponent) {
-              var Component11 = fiber.type;
-              if (isContextProvider(Component11)) {
-                return processChildContext(fiber, Component11, parentContext);
+              var Component12 = fiber.type;
+              if (isContextProvider(Component12)) {
+                return processChildContext(fiber, Component12, parentContext);
               }
             }
             return parentContext;
@@ -26287,9 +26287,9 @@
   var ButtonBase = (_a) => {
     var { children = null, className = "", component = "button", isClicked = false, isBlock = false, isDisabled = false, isAriaDisabled = false, isLoading = null, isDanger = false, spinnerAriaValueText, spinnerAriaLabelledBy, spinnerAriaLabel, size = ButtonSize.default, inoperableEvents = ["onClick", "onKeyPress"], isInline = false, type = ButtonType.button, variant = ButtonVariant.primary, state = ButtonState.unread, hasNoPadding = false, iconPosition = "start", "aria-label": ariaLabel = null, icon = null, role, ouiaId, ouiaSafe = true, tabIndex = null, innerRef, countOptions } = _a, props = __rest(_a, ["children", "className", "component", "isClicked", "isBlock", "isDisabled", "isAriaDisabled", "isLoading", "isDanger", "spinnerAriaValueText", "spinnerAriaLabelledBy", "spinnerAriaLabel", "size", "inoperableEvents", "isInline", "type", "variant", "state", "hasNoPadding", "iconPosition", "aria-label", "icon", "role", "ouiaId", "ouiaSafe", "tabIndex", "innerRef", "countOptions"]);
     const ouiaProps = useOUIAProps(Button.displayName, ouiaId, ouiaSafe, variant);
-    const Component11 = component;
-    const isButtonElement = Component11 === "button";
-    const isInlineSpan = isInline && Component11 === "span";
+    const Component12 = component;
+    const isButtonElement = Component12 === "button";
+    const isInlineSpan = isInline && Component12 === "span";
     const isIconAlignedAtEnd = iconPosition === "end" || iconPosition === "right";
     const preventedEvents = inoperableEvents.reduce((handlers, eventToPrevent) => Object.assign(Object.assign({}, handlers), { [eventToPrevent]: (event) => {
       event.preventDefault();
@@ -26306,7 +26306,7 @@
     const _icon = icon && React14.createElement("span", { className: css(button_default.buttonIcon, children && button_default.modifiers[isIconAlignedAtEnd ? "end" : "start"]) }, icon);
     const _children = children && React14.createElement("span", { className: css("pf-v6-c-button__text") }, children);
     return React14.createElement(
-      Component11,
+      Component12,
       Object.assign({}, props, isAriaDisabled ? preventedEvents : null, { "aria-disabled": isAriaDisabled || !isButtonElement && isDisabled, "aria-label": ariaLabel, className: css(button_default.button, button_default.modifiers[variant], isBlock && button_default.modifiers.block, isDisabled && !isButtonElement && button_default.modifiers.disabled, isAriaDisabled && button_default.modifiers.ariaDisabled, isClicked && button_default.modifiers.clicked, isInline && variant === ButtonVariant.link && button_default.modifiers.inline, isDanger && (variant === ButtonVariant.secondary || variant === ButtonVariant.link) && button_default.modifiers.danger, isLoading !== null && variant !== ButtonVariant.plain && button_default.modifiers.progress, isLoading && button_default.modifiers.inProgress, hasNoPadding && variant === ButtonVariant.plain && button_default.modifiers.noPadding, variant === ButtonVariant.stateful && button_default.modifiers[state], size === ButtonSize.sm && button_default.modifiers.small, size === ButtonSize.lg && button_default.modifiers.displayLg, className), disabled: isButtonElement ? isDisabled : null, tabIndex: tabIndex !== null ? tabIndex : getDefaultTabIdx(), type: isButtonElement || isInlineSpan ? type : null, role: isInlineSpan ? "button" : role, ref: innerRef }, ouiaProps),
       isLoading && React14.createElement(
         "span",
@@ -26532,7 +26532,7 @@
   });
   var Card = (_a) => {
     var { children, id = "", className, component = "div", isCompact = false, isSelectable = false, isClickable = false, isDisabled = false, isSelected = false, isClicked = false, isExpanded = false, isLarge = false, isFullHeight = false, isPlain = false, variant = "default", ouiaId, ouiaSafe = true } = _a, props = __rest(_a, ["children", "id", "className", "component", "isCompact", "isSelectable", "isClickable", "isDisabled", "isSelected", "isClicked", "isExpanded", "isLarge", "isFullHeight", "isPlain", "variant", "ouiaId", "ouiaSafe"]);
-    const Component11 = component;
+    const Component12 = component;
     const ouiaProps = useOUIAProps(Card.displayName, ouiaId, ouiaSafe);
     if (isCompact && isLarge) {
       console.warn("Card: Cannot use isCompact with isLarge. Defaulting to isCompact");
@@ -26561,7 +26561,7 @@
         isClicked,
         isDisabled
       } },
-      React17.createElement(Component11, Object.assign({ id, className: css(card_default.card, isCompact && card_default.modifiers.compact, isExpanded && card_default.modifiers.expanded, isLarge && card_default.modifiers.displayLg, isFullHeight && card_default.modifiers.fullHeight, isPlain && card_default.modifiers.plain, variant === "secondary" && card_default.modifiers.secondary, getSelectableModifiers(), isDisabled && card_default.modifiers.disabled, className) }, props, ouiaProps), children)
+      React17.createElement(Component12, Object.assign({ id, className: css(card_default.card, isCompact && card_default.modifiers.compact, isExpanded && card_default.modifiers.expanded, isLarge && card_default.modifiers.displayLg, isFullHeight && card_default.modifiers.fullHeight, isPlain && card_default.modifiers.plain, variant === "secondary" && card_default.modifiers.secondary, getSelectableModifiers(), isDisabled && card_default.modifiers.disabled, className) }, props, ouiaProps), children)
     );
   };
   Card.displayName = "Card";
@@ -26570,8 +26570,8 @@
   var React18 = __toESM(require_react());
   var CardBody = (_a) => {
     var { children, className, component = "div", isFilled = true } = _a, props = __rest(_a, ["children", "className", "component", "isFilled"]);
-    const Component11 = component;
-    return React18.createElement(Component11, Object.assign({ className: css(card_default.cardBody, !isFilled && card_default.modifiers.noFill, className) }, props), children);
+    const Component12 = component;
+    return React18.createElement(Component12, Object.assign({ className: css(card_default.cardBody, !isFilled && card_default.modifiers.noFill, className) }, props), children);
   };
   CardBody.displayName = "CardBody";
 
@@ -26580,12 +26580,12 @@
   var CardTitle = (_a) => {
     var { children, className, component = "div" } = _a, props = __rest(_a, ["children", "className", "component"]);
     const { cardId } = React19.useContext(CardContext);
-    const Component11 = component;
+    const Component12 = component;
     const titleId = cardId ? `${cardId}-title` : "";
     return React19.createElement(
       "div",
       { className: css(card_default.cardTitle) },
-      React19.createElement(Component11, Object.assign({ className: css(card_default.cardTitleText, className), id: titleId || void 0 }, props), children)
+      React19.createElement(Component12, Object.assign({ className: css(card_default.cardTitleText, className), id: titleId || void 0 }, props), children)
     );
   };
   CardTitle.displayName = "CardTitle";
@@ -26644,10 +26644,10 @@
         label,
         isRequired && React20.createElement("span", { className: css(check_default.checkLabelRequired), "aria-hidden": "true" }, ASTERISK)
       ) : null;
-      const Component11 = component !== null && component !== void 0 ? component : wrapWithLabel ? "label" : "div";
+      const Component12 = component !== null && component !== void 0 ? component : wrapWithLabel ? "label" : "div";
       checkedProps.checked = checkedProps.checked === null ? false : checkedProps.checked;
       return React20.createElement(
-        Component11,
+        Component12,
         { className: css(check_default.check, !label && check_default.modifiers.standalone, className), htmlFor: wrapWithLabel ? props.id : void 0 },
         labelPosition === "start" ? React20.createElement(
           React20.Fragment,
@@ -27235,9 +27235,9 @@
     var { children, className, itemId = null, to, hasCheckbox = false, isActive = null, isFavorited = null, isLoadButton = false, isLoading = false, flyoutMenu, direction, description = null, onClick = () => {
     }, component = "button", isDisabled = false, isAriaDisabled = false, isExternalLink = false, isSelected = null, isFocused, isDanger = false, icon, actions, onShowFlyout, drilldownMenu, isOnPath, innerRef, id, "aria-label": ariaLabel, tooltipProps, rel, target, download } = _a, props = __rest(_a, ["children", "className", "itemId", "to", "hasCheckbox", "isActive", "isFavorited", "isLoadButton", "isLoading", "flyoutMenu", "direction", "description", "onClick", "component", "isDisabled", "isAriaDisabled", "isExternalLink", "isSelected", "isFocused", "isDanger", "icon", "actions", "onShowFlyout", "drilldownMenu", "isOnPath", "innerRef", "id", "aria-label", "tooltipProps", "rel", "target", "download"]);
     const { menuId, parentMenu, onSelect, onActionClick, activeItemId, selected, drilldownItemPath, onDrillIn, onDrillOut, flyoutRef, setFlyoutRef, disableHover, role: menuRole } = React27.useContext(MenuContext);
-    let Component11 = to ? "a" : component;
+    let Component12 = to ? "a" : component;
     if (hasCheckbox && !to) {
-      Component11 = "label";
+      Component12 = "label";
     }
     const [flyoutTarget, setFlyoutTarget] = React27.useState(null);
     const flyoutContext = React27.useContext(FlyoutContext);
@@ -27339,7 +27339,7 @@
       }
     }
     let additionalProps = {};
-    if (Component11 === "a") {
+    if (Component12 === "a") {
       additionalProps = {
         href: to,
         "aria-disabled": isDisabled || isAriaDisabled ? true : null,
@@ -27349,7 +27349,7 @@
         rel,
         download
       };
-    } else if (Component11 === "button") {
+    } else if (Component12 === "button") {
       additionalProps = {
         type: "button",
         "aria-disabled": isAriaDisabled ? true : null
@@ -27409,7 +27409,7 @@
       React27.Fragment,
       null,
       React27.createElement(GenerateId, null, (randomId) => React27.createElement(
-        Component11,
+        Component12,
         Object.assign({ id, tabIndex: -1, className: css(menu_default.menuItem, getIsSelected() && !hasCheckbox && menu_default.modifiers.selected, className), "aria-current": getAriaCurrent() }, !hasCheckbox && { disabled: isDisabled, "aria-label": ariaLabel }, !hasCheckbox && !flyoutMenu && { role: isSelectMenu ? "option" : "menuitem" }, !hasCheckbox && !flyoutMenu && isSelectMenu && { "aria-selected": getIsSelected() }, { ref: innerRef }, !hasCheckbox && {
           onClick: (event) => {
             if (!isAriaDisabled) {
@@ -28056,7 +28056,7 @@
   var Grid = (_a) => {
     var { children = null, className = "", component = "div", hasGutter, span = null, order: order2, style } = _a, props = __rest(_a, ["children", "className", "component", "hasGutter", "span", "order", "style"]);
     const classes = [grid_default.grid, span && grid_default.modifiers[`all_${span}Col`]];
-    const Component11 = component;
+    const Component12 = component;
     Object.entries(DeviceSizes).forEach(([propKey, gridSpanModifier]) => {
       const key = propKey;
       const propValue = props[key];
@@ -28065,7 +28065,7 @@
       }
       delete props[key];
     });
-    return React33.createElement(Component11, Object.assign({ className: css(...classes, hasGutter && grid_default.modifiers.gutter, className), style: style || order2 ? Object.assign(Object.assign({}, style), setBreakpointCssVars(order2, l_grid_item_Order.name)) : void 0 }, props), children);
+    return React33.createElement(Component12, Object.assign({ className: css(...classes, hasGutter && grid_default.modifiers.gutter, className), style: style || order2 ? Object.assign(Object.assign({}, style), setBreakpointCssVars(order2, l_grid_item_Order.name)) : void 0 }, props), children);
   };
   Grid.displayName = "Grid";
 
@@ -28079,7 +28079,7 @@
       rowSpan && grid_default.modifiers[`${rowSpan}Row`],
       offset2 && grid_default.modifiers[`offset_${offset2}Col`]
     ];
-    const Component11 = component;
+    const Component12 = component;
     Object.entries(DeviceSizes).forEach(([propKey, classModifier]) => {
       const key = propKey;
       const rowSpanKey = `${key}RowSpan`;
@@ -28100,7 +28100,7 @@
       delete props[rowSpanKey];
       delete props[offsetKey];
     });
-    return React34.createElement(Component11, Object.assign({ className: css(...classes, className), style: style || order2 ? Object.assign(Object.assign({}, style), setBreakpointCssVars(order2, l_grid_item_Order.name)) : void 0 }, props), children);
+    return React34.createElement(Component12, Object.assign({ className: css(...classes, className), style: style || order2 ? Object.assign(Object.assign({}, style), setBreakpointCssVars(order2, l_grid_item_Order.name)) : void 0 }, props), children);
   };
   GridItem.displayName = "GridItem";
 
@@ -28632,6 +28632,90 @@
     toggleAriaLabel: "Show content",
     additionalActions: null,
     ouiaSafe: true
+  };
+
+  // node_modules/@patternfly/react-core/dist/esm/components/Switch/Switch.js
+  var React44 = __toESM(require_react());
+
+  // node_modules/@patternfly/react-styles/css/components/Switch/switch.mjs
+  var switch_default = {
+    "dirRtl": "pf-v6-m-dir-rtl",
+    "modifiers": {
+      "reverse": "pf-m-reverse"
+    },
+    "switch": "pf-v6-c-switch",
+    "switchInput": "pf-v6-c-switch__input",
+    "switchLabel": "pf-v6-c-switch__label",
+    "switchToggle": "pf-v6-c-switch__toggle",
+    "switchToggleIcon": "pf-v6-c-switch__toggle-icon"
+  };
+
+  // node_modules/@patternfly/react-core/dist/esm/components/Switch/Switch.js
+  var Switch = class _Switch extends React44.Component {
+    constructor(props) {
+      super(props);
+      if (!props.label && !props["aria-label"] && !props["aria-labelledby"]) {
+        console.error("Switch: Switch requires at least one of label, aria-labelledby, or aria-label props to be specified");
+      }
+      this.id = props.id || getUniqueId();
+      this.state = {
+        ouiaStateId: getDefaultOUIAId(_Switch.displayName)
+      };
+    }
+    render() {
+      const _a = this.props, {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        id,
+        className,
+        label,
+        isChecked,
+        defaultChecked,
+        hasCheckIcon,
+        isDisabled,
+        onChange,
+        isReversed,
+        ouiaId,
+        ouiaSafe,
+        "aria-label": ariaLabel,
+        "aria-labelledby": ariaLabelledBy
+      } = _a, props = __rest(_a, ["id", "className", "label", "isChecked", "defaultChecked", "hasCheckIcon", "isDisabled", "onChange", "isReversed", "ouiaId", "ouiaSafe", "aria-label", "aria-labelledby"]);
+      const hasAccessibleName = label || ariaLabel || ariaLabelledBy;
+      const isAriaLabelledBy = hasAccessibleName && (!ariaLabel || ariaLabelledBy);
+      const useDefaultAriaLabelledBy = !ariaLabelledBy && !ariaLabel;
+      const ariaLabelledByIds = ariaLabelledBy !== null && ariaLabelledBy !== void 0 ? ariaLabelledBy : `${this.id}-label`;
+      return React44.createElement(
+        "label",
+        Object.assign({ className: css(switch_default.switch, isReversed && switch_default.modifiers.reverse, className), htmlFor: this.id }, getOUIAProps(_Switch.displayName, ouiaId !== void 0 ? ouiaId : this.state.ouiaStateId, ouiaSafe)),
+        React44.createElement("input", Object.assign({ id: this.id, className: css(switch_default.switchInput), type: "checkbox", role: "switch", onChange: (event) => onChange(event, event.target.checked) }, defaultChecked !== void 0 ? { defaultChecked } : { checked: isChecked }, { disabled: isDisabled, "aria-labelledby": isAriaLabelledBy ? ariaLabelledByIds : null, "aria-label": ariaLabel }, props)),
+        label !== void 0 ? React44.createElement(
+          React44.Fragment,
+          null,
+          React44.createElement("span", { className: css(switch_default.switchToggle) }, hasCheckIcon && React44.createElement(
+            "span",
+            { className: css(switch_default.switchToggleIcon), "aria-hidden": "true" },
+            React44.createElement(check_icon_default, null)
+          )),
+          React44.createElement("span", { className: css(switch_default.switchLabel), id: isAriaLabelledBy && useDefaultAriaLabelledBy ? `${this.id}-label` : null, "aria-hidden": "true" }, label)
+        ) : React44.createElement(
+          "span",
+          { className: css(switch_default.switchToggle) },
+          React44.createElement(
+            "div",
+            { className: css(switch_default.switchToggleIcon), "aria-hidden": "true" },
+            React44.createElement(check_icon_default, null)
+          )
+        )
+      );
+    }
+  };
+  Switch.displayName = "Switch";
+  Switch.defaultProps = {
+    isChecked: true,
+    isDisabled: false,
+    isReversed: false,
+    "aria-label": void 0,
+    "aria-labelledby": void 0,
+    onChange: () => void 0
   };
 
   // pkg/lib/cockpit/_internal/base64.js
@@ -32259,6 +32343,7 @@
     const [response, setResponse] = (0, import_react6.useState)("");
     const [isGenerating, setIsGenerating] = (0, import_react6.useState)(false);
     const [currentRequest, setCurrentRequest] = (0, import_react6.useState)(null);
+    const [codeBlockProcessing, setCodeBlockProcessing] = (0, import_react6.useState)(false);
     const responseRef = (0, import_react6.useRef)(null);
     (0, import_react6.useEffect)(() => {
       if (responseRef.current) {
@@ -32430,7 +32515,15 @@
         isDisabled: !selectedModel || !isGenerating && !prompt.trim()
       },
       isGenerating ? _("Stop") : _("Send")
-    ))))), /* @__PURE__ */ import_react6.default.createElement(Card, { style: { flex: 1, display: "flex", flexDirection: "column" } }, /* @__PURE__ */ import_react6.default.createElement(CardTitle, null, _("Response")), /* @__PURE__ */ import_react6.default.createElement(CardBody, { style: { flex: 1, overflow: "auto" } }, isGenerating && !response && /* @__PURE__ */ import_react6.default.createElement(Spinner, { "aria-label": _("Generating response") }), generationError && /* @__PURE__ */ import_react6.default.createElement(Alert, { variant: "danger", isInline: true, title: generationError }), response && /* @__PURE__ */ import_react6.default.createElement("div", { ref: responseRef, style: { fontFamily: "monospace" } }, renderResponse(response)), !isGenerating && !response && !generationError && /* @__PURE__ */ import_react6.default.createElement("p", null, _("The response from Ollama will appear here.")))));
+    ))))), /* @__PURE__ */ import_react6.default.createElement(Card, { style: { flex: 1, display: "flex", flexDirection: "column" } }, /* @__PURE__ */ import_react6.default.createElement(CardTitle, { style: { display: "flex", justifyContent: "space-between", alignItems: "center" } }, _("Response"), /* @__PURE__ */ import_react6.default.createElement(
+      Switch,
+      {
+        id: "code-block-toggle",
+        label: _("Process code blocks"),
+        isChecked: codeBlockProcessing,
+        onChange: (_event, checked) => setCodeBlockProcessing(checked)
+      }
+    )), /* @__PURE__ */ import_react6.default.createElement(CardBody, { style: { flex: 1, overflow: "auto" } }, isGenerating && !response && /* @__PURE__ */ import_react6.default.createElement(Spinner, { "aria-label": _("Generating response") }), generationError && /* @__PURE__ */ import_react6.default.createElement(Alert, { variant: "danger", isInline: true, title: generationError }), response && /* @__PURE__ */ import_react6.default.createElement("div", { ref: responseRef, style: { fontFamily: "monospace", whiteSpace: codeBlockProcessing ? "normal" : "pre-wrap" } }, codeBlockProcessing ? renderResponse(response) : response), !isGenerating && !response && !generationError && /* @__PURE__ */ import_react6.default.createElement("p", null, _("The response from Ollama will appear here.")))));
   };
 
   // src/index.tsx

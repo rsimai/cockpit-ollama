@@ -32,6 +32,7 @@ import { TextArea } from "@patternfly/react-core/dist/esm/components/TextArea/in
 import { InputGroup } from "@patternfly/react-core/dist/esm/components/InputGroup/index.js";
 import { InputGroupItem } from "@patternfly/react-core/dist/esm/components/InputGroup/index.js";
 import { ClipboardCopy } from "@patternfly/react-core/dist/esm/components/ClipboardCopy/index.js";
+import { Switch } from "@patternfly/react-core/dist/esm/components/Switch/index.js";
 
 import cockpit from 'cockpit';
 
@@ -56,6 +57,7 @@ export const Application = () => {
     const [response, setResponse] = useState('');
     const [isGenerating, setIsGenerating] = useState(false);
     const [currentRequest, setCurrentRequest] = useState<any>(null);
+    const [codeBlockProcessing, setCodeBlockProcessing] = useState(false);
     const responseRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -296,11 +298,19 @@ export const Application = () => {
                 </CardBody>
             </Card>
             <Card style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                <CardTitle>{_("Response")}</CardTitle>
+                <CardTitle style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    {_("Response")}
+                    <Switch
+                        id="code-block-toggle"
+                        label={_("Process code blocks")}
+                        isChecked={codeBlockProcessing}
+                        onChange={(_event, checked) => setCodeBlockProcessing(checked)}
+                    />
+                </CardTitle>
                 <CardBody style={{ flex: 1, overflow: 'auto' }}>
                     {isGenerating && !response && <Spinner aria-label={_("Generating response")} />}
                     {generationError && <Alert variant="danger" isInline title={generationError} />}
-                    {response && <div ref={responseRef} style={{ fontFamily: 'monospace' }}>{renderResponse(response)}</div>}
+                    {response && <div ref={responseRef} style={{ fontFamily: 'monospace', whiteSpace: codeBlockProcessing ? 'normal' : 'pre-wrap' }}>{codeBlockProcessing ? renderResponse(response) : response}</div>}
                     {!isGenerating && !response && !generationError && <p>{_("The response from Ollama will appear here.")}</p>}
                 </CardBody>
             </Card>
