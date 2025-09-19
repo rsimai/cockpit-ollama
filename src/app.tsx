@@ -188,11 +188,15 @@ backgroundColor: hoveredBlock === index ? 'rgba(0, 123, 255, 0.3)' : 'rgba(128, 
 
         setCurrentRequest(promise);
 
+        let buffer = '';
         promise.stream(chunk => {
             try {
-                // Ollama streams JSON objects separated by newlines
-                const lines = chunk.split('\n').filter(line => line.trim() !== '');
+                buffer += chunk;
+                const lines = buffer.split('\n');
+                buffer = lines.pop() || ''; // Keep incomplete line in buffer
+                
                 for (const line of lines) {
+                    if (line.trim() === '') continue;
                     const data = JSON.parse(line);
                     if (data.response) {
                         setResponse(prev => prev + data.response);

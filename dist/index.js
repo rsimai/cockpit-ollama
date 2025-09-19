@@ -31985,10 +31985,14 @@
         headers: { "Content-Type": "application/json" }
       });
       setCurrentRequest(promise);
+      let buffer = "";
       promise.stream((chunk) => {
         try {
-          const lines = chunk.split("\n").filter((line) => line.trim() !== "");
+          buffer += chunk;
+          const lines = buffer.split("\n");
+          buffer = lines.pop() || "";
           for (const line of lines) {
+            if (line.trim() === "") continue;
             const data = JSON.parse(line);
             if (data.response) {
               setResponse((prev) => prev + data.response);
